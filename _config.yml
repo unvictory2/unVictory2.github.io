@@ -11,7 +11,7 @@
 # https://mmistakes.github.io/minimal-mistakes/docs/quick-start-guide/#installing-the-theme
 
 defaults:
-  # _posts
+  _posts
   - scope:
       path: ""
       type: posts
@@ -34,7 +34,7 @@ title_separator          : "-"
 subtitle                 : # site tagline that appears below site title in masthead
 name                     : "unVictory2"
 description              : "이것저것"
-url                      : # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
+url                      : "https://unVictory2.github.io"
 baseurl                  : # the subpath of your site, e.g. "/blog"
 repository               : # GitHub username/repo-name e.g. "mmistakes/minimal-mistakes"
 teaser                   : ./assets/backgroundimage.jpg  # path of fallback teaser image, e.g. "/assets/images/500x300.png"
