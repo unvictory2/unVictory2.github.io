@@ -2,6 +2,7 @@
 layout : post
 title : "깃허브 블로그 쉽지가 아네"
 excerpt : "됐으면 좋겠네요..."
+published: true
 
 categories : 
     - 블로그
