@@ -1,0 +1,16 @@
+---
+layout : categories
+title : "포스트 레이아웃 문제"
+excerpt : "layout : post 미적용"
+published: true
+
+categories : 
+    - 블로그
+  
+toc : true
+toc_sticky : true
+
+date : 2023-06-24
+last modified : 2023-06-24
+---
+testing out the "categories" layout
