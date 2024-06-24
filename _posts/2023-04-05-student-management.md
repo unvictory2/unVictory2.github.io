@@ -21,3 +21,5 @@ main.cpp는 School형 객체를 생성하고, 생성한 객체의 멤버 함수�
 School.cpp는  
 # 코드
 # 실행화면
+
+ㅇ내
