@@ -71,5 +71,6 @@ int num;
 String str;
 double d;
 bool ok;
+```
 이들은 모두 변수가 아니라 객체다.
 
