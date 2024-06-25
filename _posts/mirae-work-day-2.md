@@ -66,9 +66,10 @@ last modified : 2024-06-25
 ## Dart의 자료형
 
 기본적인 데이터 타입:
-'''dart
+```dart
 int num;
 String str;
 double d;
 bool ok;
-'''
+이들은 모두 변수가 아니라 객체다.
+
