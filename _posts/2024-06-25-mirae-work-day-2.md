@@ -62,9 +62,11 @@ last modified : 2024-06-25
      ![image](https://github.com/unVictory2/unVictory2.github.io/assets/117062169/bb4b78c8-a29f-43f3-bc61-066e503af724)
      ![image](https://github.com/unVictory2/unVictory2.github.io/assets/117062169/ddc46972-2c59-41d5-a978-b8e1e1dfe525)
 <br>
+
 #### 3. VSC에서 로그 열고 Dart 입력 후 제대로 뜨나 확인
 ![image](https://github.com/unVictory2/unVictory2.github.io/assets/117062169/4b64d41d-fd58-4749-a838-a602284ceefe)
 <br>
+
 #### 4. CMD에서 Flutter 프로젝트 할 경로까지 가서 `dart create exam01`
    - PowerShell에선 안 될 수도 있다
    - 프로젝트 exam01 만듦
