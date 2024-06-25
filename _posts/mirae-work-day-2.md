@@ -35,7 +35,7 @@ last modified : 2024-06-25
 
 1. VSC에서 Flutter Extention을 추가 (Flutter를 깐 것은 아님, Extention 추가했을 뿐)
    - `Shift + Ctrl + P` > `flutter new`까지 치고 `flutter new projects` 엔터
-   - Locate SDK, 설치 디렉토리 찾아서 넣어주기
+   - Locate SDK, 설치 디렉토리 찾아서 넣어주기</br>
      ![image](https://github.com/unVictory2/unVictory2.github.io/assets/117062169/341f37c4-2424-4ed1-ba08-991a2a2cfc91)
    - 없다 하면 폴더 위치를 내부의 `bin`으로
    - 예시: `C:\Users\seung\Desktop\공부\flutter_windows_3.22.2-stable\flutter\bin`
@@ -66,9 +66,9 @@ last modified : 2024-06-25
 ## Dart의 자료형
 
 기본적인 데이터 타입:
-```dart
+'''dart
 int num;
 String str;
 double d;
 bool ok;
-'''
+
