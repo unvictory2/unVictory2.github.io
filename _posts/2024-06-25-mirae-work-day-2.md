@@ -63,7 +63,7 @@ last modified : 2024-06-25
      ![image](https://github.com/unVictory2/unVictory2.github.io/assets/117062169/ddc46972-2c59-41d5-a978-b8e1e1dfe525)
 <br>
 #### 3. VSC에서 로그 열고 Dart 입력 후 제대로 뜨나 확인
-![alt text](image-1.png)
+![image](https://github.com/unVictory2/unVictory2.github.io/assets/117062169/4b64d41d-fd58-4749-a838-a602284ceefe)
 <br>
 #### 4. CMD에서 Flutter 프로젝트 할 경로까지 가서 `dart create exam01`
    - PowerShell에선 안 될 수도 있다
@@ -82,7 +82,7 @@ last modified : 2024-06-25
 ## 초기 화면 알아보기
 
 #### bin과 lib
-![alt text](image-2.png)
+![image](https://github.com/unVictory2/unVictory2.github.io/assets/117062169/e91598eb-913c-4666-94d1-95c824f2a733)
 lib의 myutil.dart에서
 ```dart
 int calculate() {
@@ -274,11 +274,11 @@ myName2 = 10;
 
 #### 하이라이팅 문제
 노트북에선 이런 식으로
-![alt text](image-3.png)
+![image](https://github.com/unVictory2/unVictory2.github.io/assets/117062169/7717a424-7e1c-47bc-8e51-e55467b75dec)
 하이라이팅이 안 되는 건 아닌데, 색이 굉장히 단조롭고 흰 색으로 남는 부분이 많았다.
 
 그에 비해 데스크탑에선
-![alt text](image-4.png)
+![image](https://github.com/unVictory2/unVictory2.github.io/assets/117062169/3b365053-f34f-42c0-8710-a7ef154aa6e2)
 이런 식으로 다채로운 하이라이팅이 됐다.
 
 **해결방법:** 테마 문제였다. 
