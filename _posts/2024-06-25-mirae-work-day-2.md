@@ -10,7 +10,7 @@ toc : true
 toc_sticky : true
 
 date : 2024-06-25
-last modified : 2024-06-25
+last modified : 2024-06-26
 ---
 
 # 2일차
@@ -255,32 +255,58 @@ String playerName(String? name) => name?? 'Guest';
 ```dart
 Object myName = 'Dart';
 ```
-myName은 'Dart'가 저장되는 순간 String 타입으로 정해진다.
+myName은 'Dart'가 저장되는 순간 String 타입으로 정해진다. 컴파일시 타입이 결정됨.
 ```dart
 String yourName = myName as String; 
 ```
-as는 형변환이라고 볼 수 있으나, 같은 클래스 계보 내에서만 가능하다. (공통 조상을 가진 경우만)
+`as`는 형변환이라고 볼 수 있으나, 같은 클래스 계보 내에서만 가능하다. (공통 조상을 가진 경우만)  
+또한, `as`는 참조 타입과 nullable 타입에만 사용 가능하며, 값 타입에는 사용 불가능하다. 값 타입은 무주건 명시적 형변환.  
+`Object` 형식으로 저장한 myName은 쓰려면 무조건 형변환을 해줘야 한다.
+
 
 ```dart
 dynamic myName2 = 'Dart';
 ```
-잘 안 쓴다. 아무거나 다 넣을 수 있어서. 뭘로든 형변환 가능하기에 권장하지 않는다.
+잘 안 쓴다. 아무거나 다 넣을 수 있어서.  
+뭘로든 형변환 가능하기에 권장하지 않는다. 
+런타임시 타입이 결정된다.  
+Object와 다르게 정말 아무거나 넣을 수 있다.
 ```dart
 myName2 = 10; 
 ```
 바로 이렇게 정수 넣어버릴 수도 있다.
 
+
 ---
 
 ## 용어, 문제 해결
 
+#### 용어
+
++ 값 타입 
+  - 스택에 저장
+  - 값을 직접 저장
+  - 변수 간 값이 복사됨
+  - 변경 시 독립적으로 작동
+  - int, double, struct 등
+
++ 참조 타입
+  - 힙에 저장
+  - 데이터의 참조(주소)를 저장
+  - 변수 간 참조가 복사됨
+  - 변경 시 동일한 데이터를 참조하는 모든 변수가 영향을 받음
+  - class, array, string, interface 등
+
+
 #### 하이라이팅 문제
 노트북에선 이런 식으로
-![image](https://github.com/unVictory2/unVictory2.github.io/assets/117062169/7717a424-7e1c-47bc-8e51-e55467b75dec)
+![image](https://github.com/unVictory2/unVictory2.github.io/assets/117062169/7717a424-7e1c-47bc-8e51-e55467b75dec)  
+
 하이라이팅이 안 되는 건 아닌데, 색이 굉장히 단조롭고 흰 색으로 남는 부분이 많았다.
 
 그에 비해 데스크탑에선
-![image](https://github.com/unVictory2/unVictory2.github.io/assets/117062169/3b365053-f34f-42c0-8710-a7ef154aa6e2)
+![image](https://github.com/unVictory2/unVictory2.github.io/assets/117062169/3b365053-f34f-42c0-8710-a7ef154aa6e2)  
+
 이런 식으로 다채로운 하이라이팅이 됐다.
 
 **해결방법:** 테마 문제였다. 
