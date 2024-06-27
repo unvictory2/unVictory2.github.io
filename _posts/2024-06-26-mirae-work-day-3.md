@@ -10,7 +10,7 @@ toc : true
 toc_sticky : true
 
 date : 2024-06-26
-last modified : 2024-06-26
+last modified : 2024-06-27
 ---
 
 # 3일차
@@ -446,17 +446,20 @@ String makeMessage(String msg) {
   return "Message: $msg";
 }
 ```
-일반 함수. `msg`를 받아서 `"Message: $msg"`이라는 문자열로 바꿔서 리턴한다.
+일반 함수. `msg`를 받아서 `"Message: $msg"`이라는 문자열로 바꿔서 리턴한다.   
+반환값 함수명 (인자) { 함수내용 }
 ```dart
 (String msg) {
   return "Message: $msg";
 }
 ```
-익명 함수로 바뀌었다. 이름과 리턴 타입 부분 생략.
+익명 함수로 바뀌었다. 이름과 리턴 타입 부분 생략.  
+(인자) { 함수 내용 }
 ```dart
 (String msg) => "Message: $msg";
 ```
-이를 더 간결하게 썼다. 이게 람다 함수. 단일 표현식일 때만 가능하다.
+이를 더 간결하게 썼다. 이게 람다 함수. 단일 표현식일 때만 가능하다.  
+(인자) { 함수 내용이 리턴 뿐일 경우, 반환할 결과만 }
 
 람다를 이용해서 함수 호출도 더 간단하게 할 수 있다.
 ```dart
