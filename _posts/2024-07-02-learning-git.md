@@ -25,5 +25,11 @@ git init : 로컬 저장소 만들기
 git status : 현재 디렉터리 상태 알려줌. 브런치는 어딘지, 커밋한 게 있는지, 변경 사항이 있는지 등.
 
 git add : 스테이지에 올리기. git add a.txt
+
 git add . : 현재 작업 디렉터리에 있는 모든 변경 사항을 한 번에 스테이지로 추가.
-git commit : git commit -m "커밋 메시지" OR git commit --message "커밋 메시지". 
+
+git commit : git commit -m "커밋 메시지" OR git commit --message "커밋 메시지".
+
+git commit -am "커밋 메시지" : add와 commit 동시에
+
+git log : 저장소의 커밋 목록 출력
