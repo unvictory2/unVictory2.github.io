@@ -471,6 +471,11 @@ void performAction(String msg, Function(String) action) {
 ```dart
 performAction("Hello Dart", (msg) => "Message: $msg");
 ```
+24.7.3 추가 : 함수가 한 줄인 경우 리턴타입 함수명(인자) => (리턴값) 형태로도 쓸 수 있다고 한다. 예를 들어
+```dart
+State<MyHomePage> createState() => _MyHomePageState();
+```
+
 - 제약
   
   + 단일 표현식: 람다 함수는 **단일 표현식**으로 구성되어야 한다.

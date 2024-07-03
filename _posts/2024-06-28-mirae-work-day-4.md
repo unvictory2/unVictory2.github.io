@@ -1,6 +1,6 @@
 ---
 layout : single
-title : "미래일경험 4일차 - 간단한 앱 제작"
+title : "미래일경험 4일차 - 기초 앱 제작 실습 분석"
 published : true
 
 categories : 
@@ -12,11 +12,21 @@ toc_sticky : true
 date : 2024-06-28
 last modified : 2024-07-03
 ---
+# 목차
++ ### 서론
++ ### 동작
++ ### 코드
++ ### 용어, 질문, 오류
 
+<hr>
+
+## 서론
 오늘은 https://codelabs.developers.google.com/codelabs/flutter-codelab-first?hl=ko#0 이걸 따라하는 시간이었다.  
 완성된 코드는 https://github.com/flutter/codelabs/blob/main/namer/step_08/lib/main.dart  
 내가 만든 건 주석이 워낙 많아서 이후 올리는 게 좋을듯.  
 그와중에 12시 넘어서 수업은 27일이었는데 28일로 해야 되네  
+
+코드에 대한 설명은 대부분 사이트에서 따라 썼을 뿐이며, 코드도 실습 그대로이기 때문에 플러터로 뭔가 만들어봤고, 그 구조를 확인한다에 의의를 두는 게 좋겠다.
 
 ## 동작
 
@@ -26,13 +36,171 @@ last modified : 2024-07-03
 4. 좌측의 홈 버튼을 누르면 이 화면으로 돌아오며, 하트 버튼을 누르면 즐겨찾기한 단어들을 볼 수 있다.  
 
 ## 코드
+전체 코드는 제일 밑에. 제일 위에 놔야되나 고민됐는데 길어서 그냥 밑에 두기로 했다.
 ```dart
 void main() { 
   runApp(MyApp()); 
 }
 ```
 main에서는 MyApp에서 정의된 앱을 실행하라고 Flutter에 지시할 뿐.  
-2-1에 배웠던 C++에서 main은 run만 불렀던 거랑 비슷하다. 그런데 그 땐 `.h` 헤더 파일에 클래스와 멤버들을 정의하고, `.cpp` 파일에 실제 구현을 했었는데, 다트는 그런 게 없는 걸까?
+2-1에 배웠던 C++에서 main은 run만 불렀던 거랑 비슷하다. 그런데 그 땐 `.h` 헤더 파일에 클래스와 멤버들을 정의하고, `.cpp` 파일에 실제 구현을 했었는데, 다트는 그런 게 없는 걸까?  
+에 대한 답은 밑 질문과 에러 모음에 쓰겠다.
+
+```dart
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return ChangeNotifierProvider(
+      create: (context) => MyAppState(), // 앱 전체 상태 생성
+      child: MaterialApp(
+        title: 'Namer App', // 앱 이름
+        theme: ThemeData( // 시각적 테마
+          useMaterial3: true,
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepOrange),
+        ),
+        home: MyHomePage(), // 홈 위젯 설정
+      ),
+    );
+  }
+}
+```
+`MyApp`의 코드는 전체 앱을 설정하는 부분이다.  
+앱 전체 상태를 생성, 앱의 이름 지정, 시각적 테마 정의, '홈' 위젯(앱의 시작점)을 설정하는 등.
+`build` 메서드는 반드시 `override` 해줘야 한다.
+
+
+```dart
+class MyAppState extends ChangeNotifier {
+  var current = WordPair.random();
+  void getNext() {
+    current = WordPair.random(); // 임의의 새 WordPair를 current에 재할당
+    notifyListeners(); // 변화 알림
+  }
+
+  var favorites = <WordPair>[]; 
+
+  void toggleFavorite() { // favorites 리스트에 넣고 빼기
+    if (favorites.contains(current)) {
+      favorites.remove(current);
+    } else {
+      favorites.add(current);
+    }
+    notifyListeners();
+  }
+}
+```
+`MyAppState`는 앱이 작동하는 데 필요한 데이터를 정의한다. 지금은 임의의 단어 쌍이 있는 단일 변수 `current` 만 포함되어 있다.  
+이 클래스는 `ChangeNotifier`를 상속 받는다.  여기서 상태가 만들어지면 `ChangeNotifierProvider`를 사용하여 앱 전체에 알려준다. 예를 들어 여기서 현재 단어 쌍이 변경되는 변화가 생기면, '새 상태가 만들어진다'고 할 수 있다. 이 상태 변화는 앱의 다른 위젯들이 알아야 추가적인 처리가 가능하기에 알려야 한다.  
+코드에서 이 일이 벌어지는 부분은 `notifyListeners()` 메서드다. MyAppState를 보고 있는 위젯들에게 알림을 보내는 메서드로, `ChangeNotifier`의 메서드다. 
+
+이 클래스의 멤버 변수로 favorites가 있는데, 빈 `WordPair`형 `List`로 초기화돼있다. 목록에 `<WordPair>[]` , 즉 단어 쌍만 포함될 수 있다고 지정돼있다. WordPair가 아닌 건 추가할 수 없기 때문에 null check를 안 해도 된다는 장점이 있는데, 이건 큰 장점이다.
+
+`toggleFavorite()` 함수는 꽤 직관적이다. 이미 좋아요 목록에 들어가 있으면 빼고, 반대의 경우엔 넣은 후 상태 변경을 알린다.
+
+```dart
+class MyHomePage extends StatefulWidget { 
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+```
+클래스 `MyHomePage`는 `StatefulWidget`을 상속받는데, 상태가 변할 수 있는 위젯이 된다는 뜻이다.  
+`MyHomePage`는 `State`객체를 생성하기만 하는데, 이 객체는 실제로 UI를 구성하고 관리하는 역할을 한다.  
+`createState`가 있는 줄에 대해서 자세히 알아보자.
+리턴 타입은 `State<MyHomePage>`이다. `State` 객체인데, `MyHomePage`에 대한 상태를 나타낼 거라는 뜻이다.  
+함수명은 `createState`고, 인자는 `()`로 없다.   
+반환값은 `_MyHomePageState`의 인스턴스이다.  
+
+
+```dart
+class _MyHomePageState extends State<MyHomePage> { // State를 확장하므로 자체 값을 관리(변경)할 수 있습니다. MyHomePage의 build 그대로 얻어옴.
+  var selectedIndex = 0; // 새 스테이트풀(Stateful) 위젯은 하나의 변수 selectedIndex만 추적하면 됩니다. 
+  @override
+  Widget build(BuildContext context) {
+```
+
+## 용어, 질문, 오류
+
+### MyHomepage, _MyHomePageState 상세 분석
+코드를 짜다 보면 "대충 뭘 하는지 알고있고, 시간이 없으니 넘어가야겠다" 식으로 넘어갈 수 있는 부분도 있다. 그러나 난 더이상 저학년이 아니고, 이 부분은 flutter 코드를 짤 때마다 보게 될 부분이기 때문에 어설프게 알고 갈 생각 없다.
+
+```dart
+class MyHomePage extends StatefulWidget { 
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+```
++ 1행 : 클래스 `MyHomePage`는 `StatefulWidget`을 상속받는데, 상태가 변할 수 있는 위젯이 된다는 뜻이다. `StatefulWidget`은 상태를 가지는 위젯을 만들기 위한 기본 클래스다.  `StatefulWidget`이 직접 상태를 변경하는 건 아니고, 상태는 `State` 클래스에서 관리된다.
+
++ 2행 : `StatefulWidget` 클래스에는 `createState`라는 추상 메서드가 있다. 추상 메서드니까 당연히 `StatefulWidget`을 상속하는 모든 클래스는 `createState` 메서드를 구현해야 한다.
+
++ 3행 : 구조 : 
+  - 리턴타입 `State<MyHomePage>`
+  - 함수명과 인자 `createState()`
+  - 람다식 `=>`
+  - 리턴값 `_MyHomePageState();  
+   
+  **리턴타입 함수명(인자) => (리턴값)** 형태는 람다 함수의 형식 중 하나로, 문법이라고 보면 된다.
+
+  `State<MyHomePage>`는 `List<int>`와 다를 바 없는 제너릭이다. `State`의 정의를 잠깐 보면
+  ```dart
+    abstract class State<T extends StatefulWidget> extends Diagnosticable {
+    T get widget => _widget;
+    BuildContext get context => _element;
+    void setState(VoidCallback fn);
+    Widget build(BuildContext context);
+    // ...
+  }
+  ```
+  로, `State` 클래스는 제네릭 타입 `T`를 사용하며, 이 `T`는 `StatefulWidget`을 상속받는 타입이어야 한다는 걸 알 수 있다. 이 클래스는 이후 `build` 메서드를 통해 ui를 구성한다. 코드 자체의 의미는 `MyHomePage`에 대한 상태를 나타낼 `State` 객체라는 뜻이다.
+
+  `createState()`는 `StatefulWidget`의 상태를 관리할 `State` 객체를 반환해야 한다. 이는 프레임워크상의 규칙이다. 위 코드에서 인자는 없다.
+
+  반환값은 `_MyHomePageState`의 인스턴스이다. 뒤에 괄호가 붙어있기 때문에 새로운 `_MyHomePageState`의 인스턴스를 만들어 반환한다는 걸 알아차릴 수 있다. `new` 키워드가 생략돼있다.  
+
+
+```
+정리하면
+앱 시작은 myhomepage에서 한다. 그런데 이건 statefulwidget으로, 화면이 바뀔 수 있는 위젯이다. 상태 관리는 statefulwidget인 myhomepage가 직접 하지 않고, state클래스의 객체를 만들어서 따로 해줘야 한다.
+그렇기에 myhomepage는 state 객체와 연결돼 있어야 한다. 그걸 하기 위해 createstate 메서드가 정의돼있다. 이 메서드는 myhompage형 state 객체인 _myhomepagestate를 반환한다. 
+맞아?
+ChatGPT
+네, 맞습니다! 여러분이 말씀하신 내용을 다시 정리해 보겠습니다:
+
+앱 시작은 MyHomePage에서: 앱의 시작 부분을 담당하는 것은 MyHomePage 위젯입니다. 이 위젯은 StatefulWidget을 상속받아서 상태를 가지며, 화면이 변경될 수 있는 상태를 관리할 수 있는 구조를 제공합니다.
+
+MyHomePage와 상태 관리: MyHomePage 위젯은 자체적으로 상태 관리를 직접 수행하지 않습니다. 대신, State 클래스의 객체를 생성하여 이를 통해 상태를 관리합니다.
+
+createState 메서드의 역할: createState 메서드는 StatefulWidget 클래스에 정의된 추상 메서드입니다. 이 메서드는 MyHomePage와 연결된 State 객체를 생성하고 반환합니다. 이 반환된 State 객체는 MyHomePage 위젯의 상태를 관리하게 됩니다.
+
+State 객체의 생성: createState 메서드는 _MyHomePageState()와 같이 호출하여 새로운 _MyHomePageState 객체를 생성합니다. Dart에서는 생성자 호출 시 new 키워드를 생략할 수 있으며, 괄호 ()를 사용하여 객체를 생성합니다.
+
+따라서, MyHomePage 위젯은 화면을 구성하고 사용자의 상호작용을 처리하는 역할을 하며, 상태 변경 및 관리는 State 객체인 _MyHomePageState가 담당합니다. 이 두 부분이 함께 동작하여 Flutter 앱의 화면 구성과 상태 관리를 가능하게 합니다.
+
+왜 MyHomePage 클래스는 상호작용 처리를 하지 않고 있는가?
+구조적인 역할 분리: MyHomePage 클래스는 UI의 구조를 정의하고, 네비게이션 레일을 포함하여 사용자가 다른 화면으로 이동할 수 있는 인터페이스를 제공합니다. 이 클래스는 주로 레이아웃과 네비게이션을 담당하며, 실제 데이터 상태나 사용자 입력에 대한 처리는 다른 클래스나 State 객체에서 담당하는 것이 일반적입니다.
+
+단일 책임 원칙: Flutter에서는 위젯의 역할을 분리하여 단일 책임 원칙을 준수하는 것이 권장됩니다. 따라서 MyHomePage 클래스는 UI를 구성하고, 데이터나 상태 관리는 State 클래스에서 분리하여 관리하는 것이 좋습니다.
+
+State 객체의 역할: _MyHomePageState 클래스는 MyHomePage의 상태를 관리하고, 필요에 따라 상태 변화에 맞춰 UI를 업데이트하는 역할을 합니다. createState 메서드는 이 상태 관리 객체를 생성하고 MyHomePage와 연결하는 중요한 역할을 합니다.
+
+왜 createState에서 _MyHomePageState 객체를 반환해야 하는가?
+State 객체의 생성: Flutter에서 StatefulWidget은 화면에 표시되기 전에 해당 위젯과 연결된 State 객체가 필요합니다. 이 State 객체는 상태 변화를 감지하고 UI를 업데이트하는 주체입니다.
+
+단일성 보장: 각 StatefulWidget는 자체적으로 단일의 State 객체를 가지며, 이 객체는 StatefulWidget의 생명주기와 함께 관리됩니다. createState 메서드에서 새로운 State 객체를 생성하여 반환하면, Flutter 프레임워크는 이를 StatefulWidget과 연결시켜 상태 관리를 가능하게 합니다.
+
+따라서 MyHomePage 클래스는 UI의 구조를 정의하고, 실제 상태 변화나 사용자 입력에 따른 처리는 _MyHomePageState 클래스에서 관리하는 것이 일반적인 Flutter 앱의 구조입니다.
+
+다른 곳에서 State 클래스를 만들어서 반환하는 것은 기술적으로 가능하지만, 일반적으로 StatelessWidget이나 다른 StatefulWidget에서는 State 클래스를 직접 생성하는 것은 권장되지 않습니다. StatefulWidget 내에서 createState 메서드를 사용하여 State 클래스를 생성하고 관리하는 것이 관례적이며, Flutter 프레임워크에서도 이 방식을 권장합니다.
+
+```
+
+
+
+
+  ### 제너릭
+
 
 ## 전체 코드
 
@@ -41,12 +209,10 @@ import 'package:english_words/english_words.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-void main() { // MyApp에서 정의된 앱을 실행하라고 Flutter에 지시할 뿐
+void main() {
   runApp(MyApp()); 
 }
 
-// MyApp의 코드는 전체 앱을 설정
-// 앱 전체 상태를 생성하고(나중에 자세히 설명) 앱의 이름을 지정하고 시각적 테마를 정의하고 '홈' 위젯(앱의 시작점)을 설정
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -66,19 +232,14 @@ class MyApp extends StatelessWidget {
   }
 }
 
-// MyAppState는 앱이 작동하는 데 필요한 데이터를 정의, 지금은 현재 임의의 단어 쌍이 있는 단일 변수만 포함되어 있습니다. 
-//상태 클래스는 ChangeNotifier를 확장. 상태가 만들어지고 ChangeNotifierProvider를 사용하여 전체 앱에 제공된다. 
-//예를 들어 현재 단어 쌍이 변경되면 앱의 일부 위젯이 알아야 합니다.
 class MyAppState extends ChangeNotifier {
   var current = WordPair.random();
   void getNext() {
-    current = WordPair.random(); // 임의의 새 WordPair를 current에 재할당
-    notifyListeners(); // MyAppState를 보고 있는 사람에게 알림을 보내는 notifyListeners()(ChangeNotifier)의 메서드)를 호출
+    current = WordPair.random(); 
+    notifyListeners(); 
   }
-
-  var favorites = <WordPair>[]; // 속성 favorites. 빈 List ([])으로 초기화. 목록에 <WordPair>[] 단어 쌍만 포함될 수 있다고 지정. WordPair가 아닌 것 추가 불가 = null check 안 해도 됨
-
-  void toggleFavorite() { // 좋아요 함수. favorites 리스트에 넣고 빼기
+  var favorites = <WordPair>[]; 
+  void toggleFavorite() {
     if (favorites.contains(current)) {
       favorites.remove(current);
     } else {
@@ -147,7 +308,7 @@ class _MyHomePageState extends State<MyHomePage> { // State를 확장하므로 �
                 child: Container( // 색상이 지정된 Container가 있고 컨테이너 안에는 GeneratorPage가 있습니다.
                   color: Theme.of(context).colorScheme.primaryContainer,
                   child: page,
-                ),
+                ), // 플러터는 정말 무한한 괄호가 있는듯 ㅋㅋ
               ),
             ],
           ),
