@@ -10,7 +10,7 @@ toc : true
 toc_sticky : true
 
 date : 2024-06-28
-last modified : 2024-07-03
+last modified : 2024-07-04
 ---
 # 목차
 + ### 서론
@@ -43,8 +43,7 @@ void main() {
 }
 ```
 main에서는 MyApp에서 정의된 앱을 실행하라고 Flutter에 지시할 뿐.  
-2-1에 배웠던 C++에서 main은 run만 불렀던 거랑 비슷하다. 그런데 그 땐 `.h` 헤더 파일에 클래스와 멤버들을 정의하고, `.cpp` 파일에 실제 구현을 했었는데, 다트는 그런 게 없는 걸까?  
-에 대한 답은 밑 질문과 에러 모음에 쓰겠다.
+2-1에 배웠던 C++에서 main은 run만 불렀던 거랑 비슷하다. 그런데 그 땐 `.h` 헤더 파일에 클래스와 멤버들을 정의하고, `.cpp` 파일에 실제 구현을 했었는데, 다트는 그런 게 없다. 왜냐면 그건 C++이 초창기 객체지향언어라 있는 거고, Java같은 다른 객체지향 언어에서도 그런 방식은 쓰지 않는다.
 
 ```dart
 class MyApp extends StatelessWidget {
@@ -66,9 +65,13 @@ class MyApp extends StatelessWidget {
   }
 }
 ```
-`MyApp`의 코드는 전체 앱을 설정하는 부분이다.  
-앱 전체 상태를 생성, 앱의 이름 지정, 시각적 테마 정의, '홈' 위젯(앱의 시작점)을 설정하는 등.
-`build` 메서드는 반드시 `override` 해줘야 한다.
+`MyApp`의 코드는 전체 앱을 설정하는 부분이다. `build` 메서드는 반드시 `override` 해줘야 하는데, 여기서 앱 전체 상태 생성, 앱 이름 지정, 시각적 테마 정의, '홈' 위젯(앱의 시작점) 설정 등의 일을 한다. 조금 자세히 살펴보자.  
+```dart
+const MyApp({super.key});
+```
+이 부분은 생성자다. 다트에서 생성자는 기본적으로 리턴 타입이 없으며, 클래스의 인스턴스를 생성하기 위한 특별한 메서드일 뿐이다. const는 리턴 타입이 아니라 이 때 생겨난 인스턴스가 불변이라는 걸 알려주는 키워드다.  
+
+
 
 
 ```dart
@@ -123,7 +126,7 @@ class _MyHomePageState extends State<MyHomePage> { // State를 확장하므로 �
 ## 용어, 질문, 오류
 
 ### MyHomepage, _MyHomePageState 상세 분석
-코드를 짜다 보면 "대충 뭘 하는지 알고있고, 시간이 없으니 넘어가야겠다" 식으로 넘어갈 수 있는 부분도 있다. 그러나 난 더이상 저학년이 아니고, 이 부분은 flutter 코드를 짤 때마다 보게 될 부분이기 때문에 어설프게 알고 갈 생각 없다.
+코드를 짜다 보면 "대충 뭘 하는지 알고있고, 시간이 없으니 넘어가야겠다" 식으로 넘어갈 수 있는 부분도 있다. 그러나 난 더이상 저학년이 아니고, 이 부분은 flutter 코드를 짤 때마다 보게 될 부분이기 때문에 자세히 알아봐야겠다.
 
 ```dart
 class MyHomePage extends StatefulWidget { 
@@ -159,47 +162,41 @@ class MyHomePage extends StatefulWidget {
 
   반환값은 `_MyHomePageState`의 인스턴스이다. 뒤에 괄호가 붙어있기 때문에 새로운 `_MyHomePageState`의 인스턴스를 만들어 반환한다는 걸 알아차릴 수 있다. `new` 키워드가 생략돼있다.  
 
+**정리하면**  
++ 앱 시작은 `MyHomePage`에서 한다. 
++ 이건 `StatefulWidget`으로, 화면이 바뀔 수 있는 위젯이다. 상태 관리는 `StatefulWidget`인 `MyHomePage`가 직접 하지 않고, `state`클래스의 객체를 만들어서 따로 해줘야 한다.
++ 그렇기에 `MyHomePage`는 `state` 객체와 연결돼 있어야 한다. 그걸 하기 위해 `createstate` 메서드가 정의돼있다. 이 메서드는 `MyHomePage`형 `state` 객체인 `_MyHomePageState`를 반환한다. 
 
+### 파라미터의 종류 (named parameter)
++ positional parameter : 지금까지 쓰던 방식, 순서에 따라 인자를 넣어 준다.
++ named parameter : 이 인자가 어느 인자인지 명시하면서 인자를 넣는 방식. 프로그램이 크다면 이 방식을 써야 하기 때문에 익숙해지는 게 좋다고 한다. 이 경우엔 인자를 **중괄호**로 한 번 더 감싸준다.
+
+```dart
+void printMessage({String? prefix, required String message}) {
+  print('$prefix $message');
+}
 ```
-정리하면
-앱 시작은 myhomepage에서 한다. 그런데 이건 statefulwidget으로, 화면이 바뀔 수 있는 위젯이다. 상태 관리는 statefulwidget인 myhomepage가 직접 하지 않고, state클래스의 객체를 만들어서 따로 해줘야 한다.
-그렇기에 myhomepage는 state 객체와 연결돼 있어야 한다. 그걸 하기 위해 createstate 메서드가 정의돼있다. 이 메서드는 myhompage형 state 객체인 _myhomepagestate를 반환한다. 
-맞아?
-ChatGPT
-네, 맞습니다! 여러분이 말씀하신 내용을 다시 정리해 보겠습니다:
-
-앱 시작은 MyHomePage에서: 앱의 시작 부분을 담당하는 것은 MyHomePage 위젯입니다. 이 위젯은 StatefulWidget을 상속받아서 상태를 가지며, 화면이 변경될 수 있는 상태를 관리할 수 있는 구조를 제공합니다.
-
-MyHomePage와 상태 관리: MyHomePage 위젯은 자체적으로 상태 관리를 직접 수행하지 않습니다. 대신, State 클래스의 객체를 생성하여 이를 통해 상태를 관리합니다.
-
-createState 메서드의 역할: createState 메서드는 StatefulWidget 클래스에 정의된 추상 메서드입니다. 이 메서드는 MyHomePage와 연결된 State 객체를 생성하고 반환합니다. 이 반환된 State 객체는 MyHomePage 위젯의 상태를 관리하게 됩니다.
-
-State 객체의 생성: createState 메서드는 _MyHomePageState()와 같이 호출하여 새로운 _MyHomePageState 객체를 생성합니다. Dart에서는 생성자 호출 시 new 키워드를 생략할 수 있으며, 괄호 ()를 사용하여 객체를 생성합니다.
-
-따라서, MyHomePage 위젯은 화면을 구성하고 사용자의 상호작용을 처리하는 역할을 하며, 상태 변경 및 관리는 State 객체인 _MyHomePageState가 담당합니다. 이 두 부분이 함께 동작하여 Flutter 앱의 화면 구성과 상태 관리를 가능하게 합니다.
-
-왜 MyHomePage 클래스는 상호작용 처리를 하지 않고 있는가?
-구조적인 역할 분리: MyHomePage 클래스는 UI의 구조를 정의하고, 네비게이션 레일을 포함하여 사용자가 다른 화면으로 이동할 수 있는 인터페이스를 제공합니다. 이 클래스는 주로 레이아웃과 네비게이션을 담당하며, 실제 데이터 상태나 사용자 입력에 대한 처리는 다른 클래스나 State 객체에서 담당하는 것이 일반적입니다.
-
-단일 책임 원칙: Flutter에서는 위젯의 역할을 분리하여 단일 책임 원칙을 준수하는 것이 권장됩니다. 따라서 MyHomePage 클래스는 UI를 구성하고, 데이터나 상태 관리는 State 클래스에서 분리하여 관리하는 것이 좋습니다.
-
-State 객체의 역할: _MyHomePageState 클래스는 MyHomePage의 상태를 관리하고, 필요에 따라 상태 변화에 맞춰 UI를 업데이트하는 역할을 합니다. createState 메서드는 이 상태 관리 객체를 생성하고 MyHomePage와 연결하는 중요한 역할을 합니다.
-
-왜 createState에서 _MyHomePageState 객체를 반환해야 하는가?
-State 객체의 생성: Flutter에서 StatefulWidget은 화면에 표시되기 전에 해당 위젯과 연결된 State 객체가 필요합니다. 이 State 객체는 상태 변화를 감지하고 UI를 업데이트하는 주체입니다.
-
-단일성 보장: 각 StatefulWidget는 자체적으로 단일의 State 객체를 가지며, 이 객체는 StatefulWidget의 생명주기와 함께 관리됩니다. createState 메서드에서 새로운 State 객체를 생성하여 반환하면, Flutter 프레임워크는 이를 StatefulWidget과 연결시켜 상태 관리를 가능하게 합니다.
-
-따라서 MyHomePage 클래스는 UI의 구조를 정의하고, 실제 상태 변화나 사용자 입력에 따른 처리는 _MyHomePageState 클래스에서 관리하는 것이 일반적인 Flutter 앱의 구조입니다.
-
-다른 곳에서 State 클래스를 만들어서 반환하는 것은 기술적으로 가능하지만, 일반적으로 StatelessWidget이나 다른 StatefulWidget에서는 State 클래스를 직접 생성하는 것은 권장되지 않습니다. StatefulWidget 내에서 createState 메서드를 사용하여 State 클래스를 생성하고 관리하는 것이 관례적이며, Flutter 프레임워크에서도 이 방식을 권장합니다.
-
+라는 `named parameter` 형식으로 인자를 받는 함수가 있을 때,
+```dart
+printMessage(prefix: 'Hello', message: 'World'); // named
 ```
+이런 식으로 호출하면 된다.
 
-
-
+### required
+`Named parameter`에서만 사용되며, 실수를 막기 위한 키워드다. 함수에서 필수적인 인자 앞에 `required`를 씀으로써 함수를 호출할 때 그 인자가 없으면 오류를 발생시킨다.  
+위에서 정의한 함수를 호출하는 예시를 살펴보자.
+```dart
+void main() {
+  printMessage(message: 'World'); // 올바른 호출
+  printMessage(prefix: 'Hello', message: 'World'); // 올바른 호출
+  printMessage(); // 오류: 'message' 인자가 필요함
+}
+```
+`required`인 `message`가 없기 때문에 마지막 줄에서만 오류가 발생한다.
 
   ### 제너릭
+
+
 
 
 ## 전체 코드
