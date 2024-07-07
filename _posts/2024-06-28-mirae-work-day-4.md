@@ -26,8 +26,6 @@ last modified : 2024-07-04
 내가 만든 건 주석이 워낙 많아서 이후 올리는 게 좋을듯.  
 그와중에 12시 넘어서 수업은 27일이었는데 28일로 해야 되네  
 
-코드에 대한 설명은 대부분 사이트에서 따라 썼을 뿐이며, 코드도 실습 그대로이기 때문에 플러터로 뭔가 만들어봤고, 그 구조를 확인한다에 의의를 두는 게 좋겠다.
-
 ## 동작
 
 1. 프로그램을 시작하면 랜덤한 단어 2개가 뜬다.  
@@ -65,14 +63,7 @@ class MyApp extends StatelessWidget {
   }
 }
 ```
-`MyApp`의 코드는 전체 앱을 설정하는 부분이다. `build` 메서드는 반드시 `override` 해줘야 하는데, 여기서 앱 전체 상태 생성, 앱 이름 지정, 시각적 테마 정의, '홈' 위젯(앱의 시작점) 설정 등의 일을 한다. 조금 자세히 살펴보자.  
-```dart
-const MyApp({super.key});
-```
-이 부분은 생성자다. 다트에서 생성자는 기본적으로 리턴 타입이 없으며, 클래스의 인스턴스를 생성하기 위한 특별한 메서드일 뿐이다. const는 리턴 타입이 아니라 이 때 생겨난 인스턴스가 불변이라는 걸 알려주는 키워드다.  
-
-
-
+`MyApp`의 코드는 전체 앱을 설정하는 부분이다. `build` 메서드는 반드시 `override` 해줘야 하는데, 여기서 앱 전체 상태 생성, 앱 이름 지정, 시각적 테마 정의, '홈' 위젯(앱의 시작점) 설정 등의 일을 한다.   
 
 ```dart
 class MyAppState extends ChangeNotifier {
@@ -125,8 +116,8 @@ class _MyHomePageState extends State<MyHomePage> { // State를 확장하므로 �
 
 ## 용어, 질문, 오류
 
-### MyHomepage, _MyHomePageState 상세 분석
-코드를 짜다 보면 "대충 뭘 하는지 알고있고, 시간이 없으니 넘어가야겠다" 식으로 넘어갈 수 있는 부분도 있다. 그러나 난 더이상 저학년이 아니고, 이 부분은 flutter 코드를 짤 때마다 보게 될 부분이기 때문에 자세히 알아봐야겠다.
+### MyHomepage, _MyHomePageState 구조 분석
+이 프로그램의 로직에 사용되는 부분말고, 모든 플러터 코드에 반복적으로 나오는 부분에 대해서 자세히 알아보자. 
 
 ```dart
 class MyHomePage extends StatefulWidget { 
@@ -165,7 +156,35 @@ class MyHomePage extends StatefulWidget {
 **정리하면**  
 + 앱 시작은 `MyHomePage`에서 한다. 
 + 이건 `StatefulWidget`으로, 화면이 바뀔 수 있는 위젯이다. 상태 관리는 `StatefulWidget`인 `MyHomePage`가 직접 하지 않고, `state`클래스의 객체를 만들어서 따로 해줘야 한다.
-+ 그렇기에 `MyHomePage`는 `state` 객체와 연결돼 있어야 한다. 그걸 하기 위해 `createstate` 메서드가 정의돼있다. 이 메서드는 `MyHomePage`형 `state` 객체인 `_MyHomePageState`를 반환한다. 
++ 그렇기에 `MyHomePage`는 `state` 객체와 연결돼 있어야 한다. 그걸 하기 위해 `createstate` 메서드가 정의돼있다. 이 메서드는 `MyHomePage`형 `state` 객체인 `_MyHomePageState`를 반환한다.
+
+### MyApp 상세 분석
+
+```dart
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return ChangeNotifierProvider(
+      create: (context) => MyAppState(), // 앱 전체 상태 생성
+      child: MaterialApp(
+        title: 'Namer App', // 앱 이름
+        theme: ThemeData( // 시각적 테마
+          useMaterial3: true,
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepOrange),
+        ),
+        home: MyHomePage(), // 홈 위젯 설정
+      ),
+    );
+  }
+}
+```
+
+```dart
+const MyApp({super.key});
+```
+이 부분은 생성자다. 다트에서 생성자는 기본적으로 리턴 타입이 없으며, 클래스의 인스턴스를 생성하기 위한 특별한 메서드일 뿐이다. const는 리턴 타입이 아니라 이 때 생겨난 인스턴스가 불변이라는 걸 알려주는 키워드다.   
 
 ### 파라미터의 종류 (named parameter)
 + positional parameter : 지금까지 쓰던 방식, 순서에 따라 인자를 넣어 준다.
