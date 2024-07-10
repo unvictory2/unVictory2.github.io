@@ -196,8 +196,20 @@ const MyApp({super.key});
 
 4. `super`는 상속에서 부모에게 접근하는 키워드다. `super.key`는 코드 문맥만 보면 단순히 부모 클래스의 속성을 나타내는 것처럼 보일 수 있지만, **Dart의 규칙에 따라 부모 클래스의 생성자를 호출하고 인자를 전달하는 역할**을 한다.  
 이런 관례는 주로 플러터에서만 사용되고, 다른 언어에서는 `super.key`를 자주 쓰지 않는다. 물론 다음과 같이 자식 클래스에서 부모 클래스의 생성자를 부르는 일은 다른 곳에서도 있다.
+
+```dart
+@override
+  Widget build(BuildContext context) {
+    return ChangeNotifierProvider(
+      create: (context) => MyAppState(),
+```
++ 부모 클래스인 `StatelessWidget`의 `build` 메서드를 오버라이드 할 거고, 반환 타입은 `Widget`이다. 
++ `build` 메서드는 위젯 상태가 변경될 때마다 호출되는 UI 구성 메서드다.
++  
+
+
 ```java
-class Parent {
+class Parent {  
   Parent(String name) {
     // ...
   }
