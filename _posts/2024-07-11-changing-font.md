@@ -27,4 +27,13 @@ last modified : 2024-07-11
 
 ![3 _variables에 추가](https://github.com/unvictory2/unVictory2.github.io/assets/117062169/e9115757-c23c-431d-995b-9e09f4f490f4)  
 
-이제 `_sass/minimal_mistakes/_variables.scss`로 가서 아까 복붙한 폰트명을 `$sans-serif`제일 앞에 넣어주면 된다.
+이제 `_sass/minimal_mistakes/_variables.scss`로 가서 아까 복붙한 폰트명을 `$sans-serif`제일 앞에 넣어주면 된다. 
+
+** 추가 **  
+이유는 모르겠지만 경로명도 맞고 이상한 곳에 쓴 것도 아닌데 적용이 안 될 때가 있다. 그럴 땐 woff 파일을 직접 받아서 프로젝트 디렉토리 안에 넣자. 그러고 경로명을 해당 디렉토리로 바꾸는 거 빼곤 동일 과정을 거치면 된다.
+
+
+<hr>
+보고 따라한 출처 :  
+
+https://kyeahen.github.io/github%20blog/blog-Github-%EB%B8%94%EB%A1%9C%EA%B7%B8-%ED%8F%B0%ED%8A%B8-%EB%B3%80%EA%B2%BD%ED%95%98%EA%B8%B0/
