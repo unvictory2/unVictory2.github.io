@@ -19,34 +19,36 @@
 {% assign image_description = image_description | markdownify | strip_html | strip_newlines | escape_once %}
 
 <div class="page__hero{% if page.header.overlay_color or page.header.overlay_image %}--overlay{% endif %}"
-  style=
-    "{% if page.header.overlay_color %}
+  style= 
+    " text-align: center; 
+    {% if page.header.overlay_color %}
       background-color: {{ page.header.overlay_color | default: 'transparent' }};
     {% endif %} 
     {% if overlay_img_path %}
-      /* 문자 가운데 정렬!!! */
-      text-align: center; 
       background-image: 
         {% if overlay_filter %}
           {{ overlay_filter }}, 
         {% endif %}
         url('{{ overlay_img_path }}');
     {% endif %}"
-
 >
+
   {% if page.header.overlay_color or page.header.overlay_image %}
     <div class="wrapper">
-      <h1 id="page-title" class="page__title" itemprop="headline" text-align="center">
+      <h1 id="page-title" class="page__title" itemprop="headline" text-align="center" >
         {% if paginator and site.paginate_show_page_num %}
           {{ site.title }}{% unless paginator.page == 1 %} {{ site.data.ui-text[site.locale].page | default: "Page" }} {{ paginator.page }}{% endunless %}
         {% else %}
-          {{ page.title | default: site.title | markdownify | remove: "<p>" | remove: "</p>" }}
+        <!-- 원래는 괄호 없이 page.title이었는데, 왜 하드코딩으로 바꾼 이유 : 블로그를 누르면 들어오는 곳은 index.html이다. 고로 이 페이지의 제목이 탭과 작업표시줄에 뜨게 되는데, 페이지명이 밤새워 친 고스톱이면 탭과 작업 표시줄에도 블로그명인 "제발돼라"가 아니라 밤새워 친 고스톱이 먼저 뜨게 된다. 그럼 사람들이 그걸 블로그명으로 헷갈릴 수 있고, 좌'상단에 뜬 제발 돼라는 뭐지?'라는 생각 및 거길 누르면 홈으로 돌아갈거란 생각을 하기 어렵다. 그래서 여기다 하드코딩하고 index.html의 제목은 비웠다.-->
+          {{ "<br/><br/>밤새워 친 고스톱도 <br/><br/>
+          따면 피곤하지 않다." | default: site.title | markdownify | remove: "<p>" | remove: "</p>" }}
         {% endif %}
       </h1>
       {% if page.tagline %}
         <p class="page__lead">{{ page.tagline | markdownify | remove: "<p>" | remove: "</p>" }}</p>
       {% elsif page.header.show_overlay_excerpt != false and page.excerpt %}
-        <p class="page__lead">{{ page.excerpt | markdownify | remove: "<p>" | remove: "</p>" }}</p>
+      <!-- 거지같은거 마진 문제였다고 한다 여기 어디다 중앙 정렬 아무리 넣어봐도 효과없다 한 시간 넘게 고민했다 marguin:0 auto 넣어주면 제목이랑 같이 중앙정렬됨, 중앙정렬 설정 자체는 윗 문단 div class = page__hero에 있다. -->
+      <p class="page__lead" style="margin: 0 auto;">{{ page.excerpt | markdownify | remove: "<p>" | remove: "</p>" }}</p>
       {% endif %}
       {% include page__meta.html %}
       {% if page.header.cta_url %}

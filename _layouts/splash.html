@@ -1,16 +1,18 @@
 ---
 layout: default
 ---
-
+<!-- page__hero.html을 불러온다 -->
 {% if page.header.overlay_color or page.header.overlay_image or page.header.image %}
   {% include page__hero.html %}
 {% elsif page.header.video.id and page.header.video.provider %}
   {% include page__hero_video.html %}
 {% endif %}
 
+<!-- 밑 부분은 메타에 추가할 뿐 실제 꾸미기나 내용이랑은 상관없다! -->
+
 <div id="main" role="main">
   <article class="splash" itemscope itemtype="https://schema.org/CreativeWork">
-    
+
     {% if page.title %}
       <meta itemprop="headline" content="{{ page.title | markdownify | strip_html | strip_newlines | escape_once }}">
     {% endif %}
