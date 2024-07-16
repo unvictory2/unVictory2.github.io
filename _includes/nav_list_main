@@ -14,7 +14,7 @@
             <ul>
                 {% for category in site.categories %}
                     {% if category[0] == "miraework" %}
-                        <li><a href="/categories/miraework" class="">미래일경험 ({{ category[1].size }})</a></li>
+                        <li><a href="/categories/miraework" class="">미래일경험 교육({{ category[1].size }})</a></li>
                     {% endif %}
                 {% endfor %}
             </ul>

@@ -1,5 +1,5 @@
 ---
-title: "미래일경험"
+title: "미래일경험 교육"
 layout: archive
 permalink: categories/miraework
 author_profile: true
