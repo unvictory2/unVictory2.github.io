@@ -5,7 +5,7 @@ excerpt : "폰트별로 글자 크기도 바꿔줄 것"
 published: true
 
 categories : 
-    - 블로그
+    - blog
   
 date : 2024-07-11
 last modified : 2024-07-11

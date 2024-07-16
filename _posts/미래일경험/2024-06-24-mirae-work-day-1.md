@@ -5,7 +5,7 @@ excerpt : "어떻게 하는 건지 기억이 안 남"
 published : true
 
 categories : 
-    - 미래일경험
+    - miraework
   
 toc : true
 toc_sticky : true

@@ -5,7 +5,7 @@ excerpt :
 published : true
 
 categories : 
-    - 미래일경험
+    - miraework
 
 date : 2024-07-03
 last modified : 2024-07-16

@@ -7,5 +7,5 @@ sidebar_main: true
 ---
 
 
-{% assign posts = site.categories.미래일경험 %}
+{% assign posts = site.categories.miraework %}
 {% for post in posts %} {% include archive-single.html type=page.entries_layout %} {% endfor %}

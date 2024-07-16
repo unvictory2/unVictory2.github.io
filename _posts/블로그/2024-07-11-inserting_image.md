@@ -5,7 +5,7 @@ excerpt : "Issues 이용"
 published: true
 
 categories : 
-    - 블로그
+    - blog
   
 date : 2024-07-11
 last modified : 2024-07-11
