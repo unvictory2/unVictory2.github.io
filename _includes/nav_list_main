@@ -13,7 +13,7 @@
         <span class="nav__sub-title">미래일경험</span>
             <ul>
                 {% for category in site.categories %}
-                    {% if category[0] == "미래일경험" %}
+                    {% if category[0] == "miraework" %}
                         <li><a href="/categories/miraework" class="">미래일경험 ({{ category[1].size }})</a></li>
                     {% endif %}
                 {% endfor %}
@@ -22,7 +22,7 @@
         <span class="nav__sub-title">etc</span>
             <ul>
                 {% for category in site.categories %}
-                    {% if category[0] == "블로그" %}
+                    {% if category[0] == "blog" %}
                         <li><a href="/categories/blog" class="">블로그 ({{ category[1].size }})</a></li>
                     {% endif %}
                 {% endfor %}
