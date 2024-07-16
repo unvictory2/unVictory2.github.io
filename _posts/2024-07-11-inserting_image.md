@@ -9,6 +9,9 @@ categories :
   
 date : 2024-07-11
 last modified : 2024-07-11
+
+# header:
+#   teaser: /assets/images/random_image1.jpg
 ---
 
 글에 이미지 넣는 게 꽤 어려웠다. 로컬 환경에서 이미지를 넣어주면 커밋했을 때 이미지가 깨졌다. 사실 당연한 일이다. 내가 커밋한 건 md 파일이고 이미지는 아니니까... 그래서 직접 깃허브에 가서 이미지를 올리곤 했었다.  
