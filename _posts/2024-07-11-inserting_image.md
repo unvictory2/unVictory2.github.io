@@ -1,7 +1,7 @@
 ---
 layout : single
 title : "글에 이미지 넣기"
-excerpt : 
+excerpt : "Issues 이용"
 published: true
 
 categories : 

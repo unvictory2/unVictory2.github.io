@@ -1,7 +1,7 @@
 ---
 layout : single
 title : "폰트 바꾸기"
-excerpt : 
+excerpt : "폰트별로 글자 크기도 바꿔줄 것"
 published: true
 
 categories : 
