@@ -133,13 +133,13 @@
     height: auto;
   }
 
-  img {
-    max-width: 110px;
-    border-radius: 50%;
+  img { // 프로필 사진 설정
+    max-width: 150px;
+    border-radius: 20%;
 
     @include breakpoint($large) {
       padding: 5px;
-      border: 1px solid $border-color;
+      border: 1.5px solid $border-color;
     }
   }
 }
