@@ -5,7 +5,7 @@ excerpt : "어떻게 하는 건지 기억이 안 남"
 published : true
 
 categories : 
-    - miraework
+    - Miraework
   
 toc : true
 toc_sticky : true

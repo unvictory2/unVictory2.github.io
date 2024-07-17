@@ -4,7 +4,7 @@ excerpt : "됐으면 좋겠네요..."
 published: true
 
 categories : 
-    - blog
+    - Blog
   
 toc : true
 toc_sticky : true

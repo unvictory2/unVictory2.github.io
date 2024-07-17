@@ -4,7 +4,7 @@ title : "미래일경험 3일차 - 함수, 컬랙션, 클래스"
 published : true
 
 categories : 
-    - miraework
+    - Miraework
   
 toc : true
 toc_sticky : true

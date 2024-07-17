@@ -4,7 +4,7 @@ title : "미래일경험 4일차 - 기초 앱 제작 실습 분석"
 published : true
 
 categories : 
-    - miraework
+    - Miraework
   
 toc : true
 toc_sticky : true

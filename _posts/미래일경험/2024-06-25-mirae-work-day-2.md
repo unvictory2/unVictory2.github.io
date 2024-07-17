@@ -4,7 +4,7 @@ title : "미래일경험 2일차 - flutter(dart) 설치 및 자료형"
 published : true
 
 categories : 
-    - miraework
+    - Miraework
   
 toc : true
 toc_sticky : true

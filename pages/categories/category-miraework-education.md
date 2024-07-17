@@ -7,5 +7,5 @@ sidebar_main: true
 ---
 
 
-{% assign posts = site.categories.miraework %}
+{% assign posts = site.categories.Miraework %}
 {% for post in posts %} {% include archive-single.html type=page.entries_layout %} {% endfor %}

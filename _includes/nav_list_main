@@ -15,7 +15,7 @@
             <!--소분류-->
             <ul>
                 {% for category in site.categories %}
-                    {% if category[0] == "miraework" %}
+                    {% if category[0] == "Miraework" %}
                         <li><a href="/categories/miraework" class="">미래일경험 교육({{ category[1].size }})</a></li>
                     {% endif %}
                 {% endfor %}
@@ -24,15 +24,15 @@
         <span class="nav__sub-title">etc</span>
             <ul>
                 {% for category in site.categories %}
-                    {% if category[0] == "blog" %}
+                    {% if category[0] == "Blog" %}
                         <li><a href="/categories/blog" class="">블로그 ({{ category[1].size }})</a></li>
                     {% endif %}
                 {% endfor %}
             </ul>
             <ul>
                 {% for category in site.categories %}
-                    {% if category[0] == "git" %}
-                        <li><a href="/categories/git" class="">git ({{ category[1].size }})</a></li>
+                    {% if category[0] == "Git" %}
+                        <li><a href="/categories/git" class="">Git ({{ category[1].size }})</a></li>
                     {% endif %}
                 {% endfor %}
             </ul>

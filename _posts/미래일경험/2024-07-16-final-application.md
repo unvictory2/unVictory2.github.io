@@ -5,7 +5,7 @@ excerpt : "flutter, firebase, spring boot, mySQL"
 published : true
 
 categories : 
-    - miraework
+    - Miraework
 
 date : 2024-07-16
 last modified : 2024-07-16

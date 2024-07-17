@@ -4,7 +4,7 @@ title : "깃 배우기"
 published : true
 
 categories : 
-    - git
+    - Git
 
 date : 2024-07-02
 last modified : 2024-07-02

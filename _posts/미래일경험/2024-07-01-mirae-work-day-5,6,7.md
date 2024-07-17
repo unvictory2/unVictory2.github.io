@@ -4,7 +4,7 @@ title : "미래일경험 5,6,7일차 - 뉴스 앱 제작"
 published : true
 
 categories : 
-    - miraework
+    - Miraework
 
 date : 2024-07-01
 last modified : 2024-07-01
