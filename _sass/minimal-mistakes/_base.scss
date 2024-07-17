@@ -67,7 +67,12 @@ p {
   margin-bottom: 1.3em;
 }
 
-u,
+u {  // <u> </u> 밑줄 관련 설정
+  text-decoration: none;
+  border-bottom: 2px solid $anso-primary-color;
+  padding-bottom: 3px;
+}
+
 ins {
   text-decoration: none;
   border-bottom: 1px solid $text-color;
@@ -133,7 +138,7 @@ a { // 하이퍼링크
   }
 
   &:visited {
-    color: $link-color-visited;
+    //color: $link-color-visited;
   }
 
   &:hover {
@@ -160,6 +165,26 @@ pre {
 
 pre {
   overflow-x: auto; /* add scrollbars to wide code blocks*/
+}
+
+// 코드 블럭 내부 처리. p a li figcap td 내부의 코드 블록을 어떻게 설정할 것인지. (문단 링크 리스트 사진주석 테이블)
+p > code,
+a > code,
+li > code,
+figcaption > code,
+td > code {
+  padding-top: 0.1rem;
+  padding-bottom: 0.1rem;
+  font-size: 0.8em;
+  background: $code-background-color; // _variables.scss에서 정의됨
+  color: $anso-primary-color; // _air.scss(현재 사용중인 테마)에서 정의됨
+  border-radius: $border-radius;
+  // 코드블럭 앞뒤로 간격을 좀 둚
+  &:before,
+  &:after {
+    letter-spacing: -0.2em;
+    content: "\00a0"; /* non-breaking space*/
+  }
 }
 
 /* horizontal rule */

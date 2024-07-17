@@ -4,7 +4,7 @@
 
 #main {
   @include clearfix;
-  margin-left: 10%; // 좌우 여백
+  margin-left: 10%; // 좌우 여백(사이드바와 본문 사이가 아니라, 사이드바보다도 왼쪽)
   margin-right: 15%;
   padding-left: 1em;
   padding-right: 1em;
