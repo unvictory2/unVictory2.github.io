@@ -19,11 +19,11 @@
   @include breakpoint($large) {
     float: left;
     width: calc(#{$right-sidebar-width-narrow} - 1em);
-    opacity: 0.75;
+    opacity: 0.8; // 사이드바 투명도, 0이면 안 보임 1이면 뚜렷함 낮아질수록 뿌애짐 기본값 0.75
     -webkit-transition: opacity 0.2s ease-in-out;
     transition: opacity 0.2s ease-in-out;
 
-    &:hover {
+    &:hover { // 마우스 올렸을 때 투명도
       opacity: 1;
     }
 
@@ -43,6 +43,7 @@
   > * {
     margin-top: 1em;
     margin-bottom: 1em;
+    margin-right: 1em; // bio와 본문 사이의 거리
   }
 
   h2,
@@ -80,7 +81,7 @@
     right: 0;
     width: $right-sidebar-width-narrow;
     margin-right: -1 * $right-sidebar-width-narrow;
-    padding-left: 1em;
+    padding-left: 2.5em; // 기본 1em, 본문과 toc 사이의 거리.
     z-index: 10;
 
     &.sticky {

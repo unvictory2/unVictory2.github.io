@@ -3,10 +3,9 @@
    ========================================================================== */
 
 /* Colors */
-// 블루베리 치즈 케이크 컨셉 색상 설정
-$background-color: #fce7e9 !default;         // 조금 덜 누런 밝은 베이지색
-$text-color: #3a3d5c !default;               // 조금 덜 어두운 남색
-$muted-text-color: #5a5e79 !default;         // 부드러운 보라색, 부가 텍스트 색상
+$background-color: #fce7e9 !default;         // 배경색
+$text-color: #000000 !default;               // 글자색
+$muted-text-color: #5a5e79 !default;         // 부가 텍스트 색상
 $primary-color: #898FCB !default;            // dreamy blue
 $border-color: #B394BB !default;             // cloud purple
 $footer-background-color: #898FCB !default;  // 푸터 배경색, dreamy blue
@@ -31,11 +30,6 @@ $anso-primary-color: #cc9900 !default; // 식빵맘님 강조색을 좀 더 어�
 // $masthead-link-color-hover: #5a5e79 !default;// 헤더 링크 호버 색상
 // $navicon-link-color-hover: #5a5e79 !default; // 내비게이션 아이콘 호버 색상
 // // #162a41 남색
-
-
-
-
-
 
 .page__footer {
   color: #fff !important; // override

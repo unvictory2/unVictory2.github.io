@@ -6,11 +6,11 @@
    Breadcrumb navigation links
    ========================================================================== */
 
-.breadcrumbs {
+.breadcrumbs { // 상단에 해당 페이지까지 가는 경로 보여주는 기능
   @include clearfix;
-  margin: 0 auto;
+  margin: 0em; // 상하좌우 공간
   max-width: 100%;
-  padding-left: 1em;
+  padding-left: 11%; // em으로 할 경우, 창 변화에 적응하지 못할수도
   padding-right: 1em;
   font-family: $sans-serif;
   -webkit-animation: $intro-transition;

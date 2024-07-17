@@ -37,6 +37,7 @@
   font-size: $type-size-3;
   color: $muted-text-color;
   border-bottom: 1px solid $border-color;
+  width: 100%; // 최근 포스트 밑에 그어져있는 줄의 길이. 부모 요소의 n%
 
   + .list__item .archive__item-title {
     margin-top: 0.5em;
@@ -74,6 +75,7 @@
 
 .archive__item-excerpt {
   margin-top: 0;
+  margin-bottom: 3em; // categories에서 항목 간의 마진 조정하기 위해
   font-size: $type-size-6; //_variables.scss에 정의
 
   & + p {

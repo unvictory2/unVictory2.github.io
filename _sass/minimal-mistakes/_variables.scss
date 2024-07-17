@@ -39,7 +39,7 @@ $type-size-2: 1.953em !default; // ~31.248px
 $type-size-3: 1.563em !default; // ~25.008px
 $type-size-4: 1.25em !default; // ~20px
 $type-size-5: 1em !default; // ~16px
-$type-size-6: 0.88em !default; // ~12px
+$type-size-6: 0.88em !default; // ~12px. 사이드바의 각종 작은 글씨들, body 부분의 excerpt들. 
 $type-size-7: 0.6875em !default; // ~11px
 $type-size-8: 0.625em !default; // ~10px
 
@@ -148,7 +148,7 @@ $small: 600px !default;
 $medium: 768px !default;
 $medium-wide: 900px !default;
 $large: 1024px !default;
-$x-large: 1280px !default;
+$x-large: 1450px !default; // 본문이 몇 픽셀까지 공간을 차지할 수 있는지, 전체 설정이라 _archive.scss나 _page.scss에서 width %를 100으로 냅두고 이걸 바꾸면 다같이 바꿀 수 있다. 즉 width = 100%라고 할 때 그 100%의 값을 설정한다고 보면 된다.
 $max-width: $x-large !default;
 
 /*
@@ -156,8 +156,8 @@ $max-width: $x-large !default;
    ========================================================================== */
 // 사이드바 크기
 $right-sidebar-width-narrow: 100px !default; // 200
-$right-sidebar-width: 200px !default; // 300
-$right-sidebar-width-wide: 250px !default; // 400
+$right-sidebar-width: 220px !default; // 300
+$right-sidebar-width-wide: 450px !default; // 400
 
 /*
    Other

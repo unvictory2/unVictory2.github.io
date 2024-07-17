@@ -95,7 +95,10 @@ select {
   width: 90px;
 }
 
-input[type="image"],
+
+
+
+input[type="image"], // image, checkbox, radio에 동시에 적용됨
 input[type="checkbox"],
 input[type="radio"] {
   width: auto;
@@ -108,15 +111,33 @@ input[type="radio"] {
   border-radius: 0;
   border: 0 \9;
   box-shadow: none;
+  
 }
 
-input[type="checkbox"],
+input[type="checkbox"], // 체크박스랑 라디오버튼에만 적용됨
 input[type="radio"] {
   box-sizing: border-box;
   padding: 0;
   *width: 13px;
   *height: 13px;
 }
+
+// 문제점 : 체크된 건 텍스트 중앙이 아니라 아래로 align돼있음
+input[type="checkbox"]:checked::before {
+  appearance: none; /* 기본 체크박스 스타일 제거 */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  content: "✔";
+  display: block;
+  text-align: center;
+  color: $anso-primary-color;
+  background-color: $darker-gray; /* 예: 슬레이트 블루 */
+  line-height: 13px;
+  font-size: 11px;
+  // margin: 0px 0px 5px 0px; // 아래 왼쪽 위 오른쪽
+  // padding-bottom: 5px // 체크박스 영역이 늘어남.
+}
+
 
 input[type="image"] {
   border: 0;
