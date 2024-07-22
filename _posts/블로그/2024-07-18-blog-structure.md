@@ -153,30 +153,10 @@ last modified : 2024-07-18
 ```
 📦_includes
  ┣ 📂analytics-providers
- ┃ ┣ 📜custom.html
- ┃ ┣ 📜google-gtag.html
- ┃ ┣ 📜google-universal.html
- ┃ ┗ 📜google.html
  ┣ 📂comments-providers
- ┃ ┣ 📜custom.html
- ┃ ┣ 📜custom_scripts.html
- ┃ ┣ 📜discourse.html
- ┃ ┣ 📜disqus.html
- ┃ ┣ 📜facebook.html
- ┃ ┣ 📜giscus.html
- ┃ ┣ 📜scripts.html
- ┃ ┣ 📜staticman.html
- ┃ ┣ 📜staticman_v2.html
- ┃ ┗ 📜utterances.html
  ┣ 📂footer
- ┃ ┗ 📜custom.html
  ┣ 📂head
- ┃ ┗ 📜custom.html
  ┣ 📂search
- ┃ ┣ 📜algolia-search-scripts.html
- ┃ ┣ 📜google-search-scripts.html
- ┃ ┣ 📜lunr-search-scripts.html
- ┃ ┗ 📜search_form.html
  ┣ 📜analytics.html
  ┣ 📜archive-single.html
  ┣ 📜author-profile-custom-links.html
@@ -214,12 +194,54 @@ last modified : 2024-07-18
  ┣ 📜toc.html
  ┗ 📜video
 ```
+길어서 폴더의 내용물들은 따로 뺐다.  
 `_includes`와 `_layouts`에 모든 html 파일들이 모여 있다. `_layouts`에는 포스트 레이아웃에 대한 html 파일들이 모여있고, `_includes`에는 포스트 레이아웃 html 파일들이 재료로 쓰는 html 파일들을 포함해서 포스트 외 부분을 구성하는 html 파일들이 모여있다.
 
+#### 루트
+포스트 레이아웃을 제외하고 이 블로그의 모든 것의 구조가 모여있다. 프로필, breadcrumbs(보고 있는 글의 디렉토리 경로 표시), 댓글, footer, masthead, 좌측의 카테고리 사이드바, toc, 글 끝의 공유하기 버튼, 태그 정렬 버튼 등 정말 모든 구조다. 내가 뭔지 아는 것만 이 정도고, 저 목록을 보면 내가 언급하지 않은 파일도 많다. 즉 블로그 구조를 바꾸고 싶을 때 웬만하면 보게 되는 곳이다.  
+
+그 중 내가 직접 썼던 몇 가지를 써보자면,  
+`nav_list_main`은 카테고리별 글을 사이드바에 추가로 보여주기 위해 만든 파일이다. 말단의 카테고리 자체는 블로그 글들의 YAML Front Matter에 쓴 카테고리와 맞춰줘야 하지만, 그 카테고리를 부를 명칭이나 상위 카테고리의 명칭은 마음대로 정할 수 있다. 이 때 겉으로 보이는 명칭은 한국어로 해도 상관 없지만, <u>내부적인 카테고리는 반드시 영어로</u> 해주는 게 좋다. 그렇지 않으면 breadcrumb에서 한글이 깨져서 나오고, 여기저기서 카테고리를 똑같이 써줘야 하는데 실수가 나올 확률이 높다.  
+`sidebar.html` 파일 마지막을 보면 YAML Front Matter의 `sidebar_main`이 true라면 이 파일을 include하는 코드가 있다. 당연한 소리지만 마지막에 넣지 않으면 bio보다 위에 나타난다. 블로그 관련한 파일들에서 코드 위치가 중요하지 않은 경우가 좀 있다보니 아무 생각 없이 이상한 곳에 넣었던 적이 있다.
+
+`paginator` 같은 경우는 글들을 하나의 목록으로 보여주는 역할을 한다. 한 페이지에 몇 개의 글을 보여줄지 정하고, 넘어갈 경우 새 페이지를 만들어서 넘겨보며 만들 수 있게 해준다. 내 블로그의 최신 포스트 부분을 담당한다.  
+
+블로그 대문에 가로로 사진을 길게 나오게 하려고 파일들을 타고 돌아다니다 알게 된 건데, page__가 붙어있는 파일들은 페이지 레이아웃과 연관있는 파일들이다. 예를 들어 `splash.html`같은 몇몇 레이아웃은 `page__hero.html`나 `page__hero_video.html`을 불러서 대문에 이미지나 영상을 제목과 함께 출력한다.
+
 #### analytics, 댓글, 검색
+```
+ ┣ 📂analytics-providers
+ ┃ ┣ 📜custom.html
+ ┃ ┣ 📜google-gtag.html
+ ┃ ┣ 📜google-universal.html
+ ┃ ┗ 📜google.html
+ ┣ 📂comments-providers
+ ┃ ┣ 📜custom.html
+ ┃ ┣ 📜custom_scripts.html
+ ┃ ┣ 📜discourse.html
+ ┃ ┣ 📜disqus.html
+ ┃ ┣ 📜facebook.html
+ ┃ ┣ 📜giscus.html
+ ┃ ┣ 📜scripts.html
+ ┃ ┣ 📜staticman.html
+ ┃ ┣ 📜staticman_v2.html
+ ┃ ┗ 📜utterances.html
+ ┗ 📂search
+   ┣ 📜algolia-search-scripts.html
+   ┣ 📜google-search-scripts.html
+   ┣ 📜lunr-search-scripts.html
+   ┗ 📜search_form.html
+```
+블로그 댓글은 `discourse`, `disqus`, `utterances` 다양한 플랫폼 중 하나를 골라서 사용하게 된다. 예를 들어, 내 블로그에는 `utterances` 플랫폼을 사용 중이다. 여기 있는 html 파일들은 각 플랫폼별로 다르게 생긴 댓글 달기 부분을 정의하는 것 같다. 파일 제목을 보니 `analytics-providers`나 `search` 쪽도 마찬가지인듯 하다.
 
 #### head, footer
-
+```
+ ┣ 📂footer
+ ┃ ┗ 📜custom.html
+ ┗ 📂head
+   ┗ 📜custom.html
+```
+둘 다 들어가보면 `head`나 `footer`에 대한 구조는 없다. 만약 구조를 자기가 바꾸고 싶다면 여기에서 하는 게 아닌가 싶다. 나는 바꾸지 않았기 때문에 별 게 없는 거고. `head`쪽에는 favicon을 불러오는 코드가 있긴 하다. 하지만 뭔가를 하지는 않는 걸로 추정된다.
 
 <br/>
 
@@ -241,6 +263,7 @@ last modified : 2024-07-18
  ┣ 📜tag.html
  ┗ 📜tags.html
 ```
+여기는 블로그 개별 글들의 레이아웃에 대한 html 파일들이 있다. 재밌는 건 이 레이아웃 파일들이 다 독립적이지 않다는 점이다. 예를 들어 `categories.html`의 레이아웃은 
 ## _posts
 ```
 📦_posts
