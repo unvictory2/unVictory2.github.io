@@ -24,25 +24,3 @@ last modified : 2024-07-18
 ## 3. 테마 색 변경하기
 아까 말했듯이 테마의 색은 변경 가능하다. `_sass\minimal-mistakes\skins\`에서 자기가 고른 테마 파일을 연다. 내 경우에는 `_air.scss`다. 여기서 각 색을 변경하면 된다.   
 `$background-color`처럼 직관적인 이름도 있지만, `$muted-text-color`처럼 조금 덜 직관적인 이름도 있다. 이런 경우에는 VSC 기준 `ctrl + shift +  f`를 누르고 검색해서 블로그 내 어디에서 이 색들을 쓰는지 볼 수 있다. 
-
-
-
-1. 밑줄 없애기 base.scss
-2. 본문 너비 바꾸기 _page.scss의 margin과 width (x)
-3. 글자 크기 바꾸기 _reset.scss
-4. 사이드바 너비 바꾸기 _variables.scss
-5. 글자 자간, 스페이스 너비 바꾸기 main.scss
-6. favicon 추가
-7. yaml front matter에 넣을 수 있는 거 모음
-8. 블로그 공부 방법 : ctrl shift f, 개발자도구, 남의꺼 뜯어보기
-9. backtick 내부 색 코드블록 안 설정
-10. 날짜표현방식, subtitle, yaml 기본값 설정 등 config.yml 내부 세팅
-11. 사이드바 추가 (카테고리)
-12. 대문 바꾸기
-13. 검색 기능 만들기
-14. 가운데 정렬
-15. 우상단 메뉴
-16. excerpt 가운데 정렬
-17. 링크 색 방문해도 안 바뀌게
-18. 최근 포스트 글자 크기
-19. 밑줄 설정 
