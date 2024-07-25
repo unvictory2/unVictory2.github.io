@@ -20,6 +20,13 @@
                     {% endif %}
                 {% endfor %}
             </ul>
+            <ul>
+                {% for category in site.categories %}
+                    {% if category[0] == "Miraework Project" %}
+                        <li><a href="/categories/miraework_project" class="">미래일경험 프로젝트({{ category[1].size }})</a></li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
         <!--etc 그룹-->
         <span class="nav__sub-title">etc</span>
             <ul>
