@@ -7,7 +7,7 @@ published : true
 categories : 
     - Miraework Project
 
-date : 2024-07-25
+date : 2024-07-13
 last modified : 2024-07-25
 ---
 ## 회의 정보
