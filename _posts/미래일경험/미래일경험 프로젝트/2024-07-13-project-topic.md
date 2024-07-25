@@ -1,7 +1,7 @@
 ---
 layout : single
 title : "[미래일경험 프로젝트] 비공식 1회차 : 주제 선정 및 예상 결과물 생성"
-excerpt : "flutter, firebase, spring boot, mySQL"
+excerpt : "수행 계획서 제출을 위한 주제 선정 및 예상 결과물 생성"
 published : true
 
 categories : 
