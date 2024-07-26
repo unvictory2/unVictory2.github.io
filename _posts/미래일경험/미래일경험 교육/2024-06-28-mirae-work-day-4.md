@@ -10,7 +10,7 @@ toc : true
 toc_sticky : true
 
 date : 2024-06-28
-last modified : 2024-07-23
+last modified : 2024-07-26
 ---
 # 목차
 + ### 서론
@@ -122,147 +122,9 @@ class _MyHomePageState extends State<MyHomePage> { //
         throw UnimplementedError('no widget for $selectedIndex');
     }
 ```
-`_MyHomePageState`는 State를 확장하므로 자체 값을 관리(변경)할 수 있고, MyHomePage의 `build`를 그대로 얻어온다. `build`에서는 `selectedIndex`의 현재 값에 따라 switch문으로 다른 화면을 `page`에 할당한다.
+`_MyHomePageState`는 State를 확장하므로 자체 값을 관리(변경)할 수 있고, MyHomePage의 `build`를 그대로 얻어온다. `build`에서는 `selectedIndex`의 현재 값에 따라 switch문으로 다른 화면을 `page`에 할당한다. `GeneratorPage`는 새 단어쌍을 보여주는 페이지, `FavoritesPage`는 하트 눌러둔 단어를 볼 수 있는 페이지다. 
 
-    ```dart
-    return LayoutBuilder( // 이 위젯을 사용하면 사용할 수 있는 공간의 양에 따라 위젯 트리를 변경할 수 있습니다.
-      builder: (context, constraints) { // LayoutBuilder의 builder 콜백은 제약 조건이 변경될 때마다 호출됩니다. 예를 들어 창 크기가 바뀐다던지.
-        return Scaffold(
-          body: Row( // 하위 요소 두 개가 있는 Row. SafeArea, Expanded.
-            children: [
-              SafeArea( // NavigationRail(탐색 레일)를 래핑하여 하위 요소가 하드웨어 노치나 상태 표시줄로 가려지지 않도록
-                child: NavigationRail( //  탐색 레일
-                  extended: constraints.maxWidth >= 600, // 라벨이 아이콘 옆에 표시될지. MyHomePage의 너비가 600픽셀 이상일 때만 라벨을 표시.
-                  destinations: [
-                    NavigationRailDestination( // 탐색 레일에 두 가지 대상이 있음 : Home, Favorites.
-                      icon: Icon(Icons.home),
-                      label: Text('Home'),
-                    ),
-                    NavigationRailDestination(
-                      icon: Icon(Icons.favorite),
-                      label: Text('Favorites'),
-                    ),
-                  ],
-                  selectedIndex: selectedIndex, // NavigationRail 위젯의 selectedIndex 속성에 현재 상태 클래스 _MyHomePageState의 selectedIndex 변수를 할당
-                  // this.selectedIndex = selectedIndex; 왼쪽은 NavigationRail의 속성, 오른쪽은 _MyHomePageState의 인스턴스 변수
-                  // "위젯의 속성"은 위젯을 구성하는 데 사용되는 매개변수 또는 인자를 의미
-                  // NavigationRail 위젯의 selectedIndex, destinations, onDestinationSelected, extended 등이 속성이라는 것은 Flutter 프레임워크에서 미리 정의된 것
-                  // 콜론 :은 Dart의 객체 초기화에서 속성 값을 지정할 때 사용
-                  // Flutter에서는 위젯을 초기화할 때 이러한 구문을 자주 사용 selectedIndex: selectedIndex
-                  // 왼쪽의 selectedIndex는 NavigationRail 위젯의 생성자에서 정의된 속성입니다.
-                  // 오른쪽의 selectedIndex는 현재 클래스(여기서는 _MyHomePageState)의 인스턴스 변수입니다.
-                  // 문맥과 클래스 정의를 통해 왼쪽과 오른쪽이 각각 무엇을 의미하는지 알 수 있습니다. > 왼 오에 뭐가 오는지는 일종의 약속이라고 봐도 된다고 함.
-                  onDestinationSelected: (value) { // 탐색 레일은 또한 사용자가 onDestinationSelected로 대상 중 하나를 선택할 때 발생하는 작업을 정의
-                    setState(() { // onDestinationSelected 콜백이 호출되면 새 값을 콘솔로 인쇄하는 대신 setState() 호출 내 selectedIndex에 할당합니다.
-                      selectedIndex = value;
-                    });
-                  },
-                ),
-              ),
-              Expanded( // 일부 하위 요소는 필요한 만큼만 공간을 차지하고(여기서는 NavigationRail) 다른 위젯은 남은 공간을 최대한 차지해야 하는(여기서는 Expanded) 레이아웃을 표현할 수 있습니다
-                child: Container( // 색상이 지정된 Container가 있고 컨테이너 안에는 GeneratorPage가 있습니다.
-                  color: Theme.of(context).colorScheme.primaryContainer,
-                  child: page,
-                ),
-              ),
-            ],
-          ),
-        );
-      }
-    );
-  }
-}
-
-class GeneratorPage extends StatelessWidget { // MyHomePage의 전체 콘텐츠가 새 위젯 GeneratorPage로 추출
-  @override
-  Widget build(BuildContext context) {
-    var appState = context.watch<MyAppState>();
-    var pair = appState.current;
-
-    IconData icon;
-    if (appState.favorites.contains(pair)) {
-      icon = Icons.favorite;
-    } else {
-      icon = Icons.favorite_border;
-    }
-
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          BigCard(pair: pair),
-          SizedBox(height: 10),
-          Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              ElevatedButton.icon(
-                onPressed: () {
-                  appState.toggleFavorite();
-                },
-                icon: Icon(icon),
-                label: Text('Like'),
-              ),
-              SizedBox(width: 10),
-              ElevatedButton(
-                onPressed: () {
-                  appState.getNext();
-                },
-                child: Text('Next'),
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-}
-  @override
-  Widget build(BuildContext context) { // 위젯의 상황이 변경될 때마다 자동으로 호출되는 build() 메서드
-    var appState = context.watch<MyAppState>(); //MyHomePage는 watch 메서드를 사용하여 앱의 현재 상태에 관한 변경사항을 추적
-    var pair = appState.current;
-
-    IconData icon; // 좋아요 눌렀는지에 따라 적당한 아이콘 설정
-    if (appState.favorites.contains(pair)) {
-      icon = Icons.favorite;
-    } else {
-      icon = Icons.favorite_border;
-    }
-
-    return Scaffold( //모든 build 메서드는 위젯 또는 중첩된 위젯 트리(좀 더 일반적임)를 반환해야 합니다. 최상위 위젯은 Scaffold입니다.
-      body: Center( // 다른 위젯들은 알아서 돼있지만, 가운데에 있지 않았던 Column 자체를 가운데 정렬
-        child: Column( // 레이아웃 위젯 중 하나. 얘를 wrap with center 해서 윗줄이 생겨남.
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            // Text('A random AWESOME idea:'), // 그냥 텍스트
-            // Text(appState.current.asLowerCase), //appState를 사용하고 해당 클래스의 유일한 멤버인 current(즉, WordPair)에 액세스
-            BigCard(pair: pair), //이걸로 변경. 원래는 전체 appState에 액세스하지만 실제로는 현재 단어 쌍이 무엇인지만 알면 됩니다.
-            SizedBox(height: 10), // 여백 
-            Row( // Next 버튼 옆에 새 버튼 추가하려고 wrap with row
-              mainAxisSize: MainAxisSize.min, // 사용 가능한 모든 가로 공간을 차지하지 말라고 Row에 지시. 없으면 버튼이 한 쪽으로 몰림.
-              children: [
-                ElevatedButton.icon(
-                  onPressed: () { //람다. 매개 변수로 아무것도 주지 않으면서 toggleFavorite 함수를 부르라
-                    appState.toggleFavorite(); // 좋아요 함수 호출
-                  },
-                  icon: Icon(icon),
-                  label: Text('Like'),
-                ),
-                SizedBox(width: 10), // 여백
-
-                ElevatedButton( //Next 라고 쓰인 버튼
-                  onPressed: () {
-                    appState.getNext();
-                  },
-                  child: Text('Next'),
-                ),
-              ],
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-```
+몇몇 중간 부분은 전체 코드의 주석과 flutter 홈페이지로 이해할 수 있을 거 같아서 생략한다. 솔직히 말하면 시간도 너무 지났고 블로그 구조 관련된 걸 하느라 여력이 없다...
 ```dart
 class BigCard extends StatelessWidget {
   const BigCard({
@@ -284,51 +146,6 @@ class BigCard extends StatelessWidget {
 ```
 이 부분은 테마와 관련된 부분이다.  
 `Theme.of(context)`로 앱의 현재 테마를 요청한다. `theme.textTheme`을 사용하여 앱의 글꼴 테마에 액세스합니다. `displayMedium` 속성은 디스플레이 텍스트를 위한 큰 스타일이다. `nullable`이라 원래는 못 부르지만, ! 연산자 붙이면 개발자가 null 아님을 보장하기 때문에 부를 수 있다.`displayMedium`에서 `copyWith()`를 호출하면 정의된 변경사항이 포함된 텍스트 스타일의 사본이 반환된다. 해당 함수 내부의 코드는 앱 테마에 액세스해서 새로운 색상을 가져온다.
-
-
-```dart
-    return Card( // Padding 위젯과 Text 위젯이 Card 위젯으로 래핑
-      color: theme.colorScheme.primary, // colorScheme 속성과 동일하도록 카드의 색상을 정의합니다. 색 구성표에는 여러 색상이 포함되어 있으며 primary가 앱을 정의하는 가장 두드러진 색상
-      child: Padding(
-        padding: const EdgeInsets.all(20.0), //padding은 text의 속성이 아니라 위젯임
-        child: Text(
-          pair.asLowerCase,
-          style: style,
-          semanticsLabel: "${pair.first} ${pair.second}",
-        ),
-      ),
-    );
-  }
-}
-
-class FavoritesPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    var appState = context.watch<MyAppState>(); // 앱의 현재 상태를 가져옵니다.
-
-    if (appState.favorites.isEmpty) { // 즐겨찾기 목록이 비어 있으면 No favorites yet이라는 메시지를 중앙에 표시
-      return Center(
-        child: Text('No favorites yet.'),
-      );
-    }
-
-    return ListView( // 목록이 비어 있지 않으면 스크롤 가능한 목록을 표시
-      children: [
-        Padding(
-          padding: const EdgeInsets.all(20),
-          child: Text('You have ' // 목록은 요약으로 시작됩니다(예: You have 5 favorites*.*).
-              '${appState.favorites.length} favorites:'),
-        ),
-        for (var pair in appState.favorites) // 그런 다음 코드가 모든 즐겨찾기를 반복하고 각 즐겨찾기의 ListTile 위젯을 구성합니다.
-          ListTile(
-            leading: Icon(Icons.favorite),
-            title: Text(pair.asLowerCase),
-          ),
-      ],
-    );
-  }
-}
-```
 
 ## 용어, 질문, 오류
 
@@ -413,17 +230,6 @@ const MyApp({super.key});
 4. `super`는 상속에서 부모에게 접근하는 키워드다. `super.key`는 코드 문맥만 보면 단순히 부모 클래스의 속성을 나타내는 것처럼 보일 수 있지만, **Dart의 규칙에 따라 부모 클래스의 생성자를 호출하고 인자를 전달하는 역할**을 한다.  
 이런 관례는 주로 플러터에서만 사용되고, 다른 언어에서는 `super.key`를 자주 쓰지 않는다. 물론 다음과 같이 자식 클래스에서 부모 클래스의 생성자를 부르는 일은 다른 곳에서도 있다.
 
-```dart
-@override
-  Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => MyAppState(),
-```
-+ 부모 클래스인 `StatelessWidget`의 `build` 메서드를 오버라이드 할 거고, 반환 타입은 `Widget`이다. 
-+ `build` 메서드는 위젯 상태가 변경될 때마다 호출되는 UI 구성 메서드다.
-+  
-
-
 ```java
 class Parent {  
   Parent(String name) {
@@ -467,5 +273,3 @@ void main() {
 }
 ```
 `required`인 `message`가 없기 때문에 마지막 줄에서만 오류가 발생한다.
-
-  ### 제너릭
