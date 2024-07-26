@@ -263,7 +263,11 @@ last modified : 2024-07-18
  ┣ 📜tag.html
  ┗ 📜tags.html
 ```
-여기는 블로그 개별 글들의 레이아웃에 대한 html 파일들이 있다. 재밌는 건 이 레이아웃 파일들이 다 독립적이지 않다는 점이다. 예를 들어 `categories.html`의 레이아웃은 
+여기는 블로그 개별 글들의 레이아웃에 대한 html 파일들이 있다. 재밌는 건 이 레이아웃 파일들이 서로 연관돼있는 레이아웃도 있다는 점이다. 예를 들어 `categories.html`의 레이아웃은 archive기 때문에, `archive.html`을 기반으로 한다. `archive.html`의 레이아웃은 `default.html`이기 때문에 결국 `categories.html`은 2개의 다른 레이아웃 파일을 참고한다.  
+이 레이아웃 파일들은 `_includes` 폴더의 루트에 있는 여러 html 파일들을 가져와서 사용한다. 예를 들어 `default.html`은 `head.html, masthead.html, search_form.html, scripts.html,footer.html` 등 다양한 html 파일들을 가져온다. <u>사실상 레이아웃은 `_includes` 폴더에 있는 개별 위젯들을 어떻게 배치할지 정해둔 파일이라고 판단된다.</u> 아마 그래서 폴더 이름도 includes인 게 아닐까? 단독으로 사용되기 보다는 여기저기서 include 되니까.
+
+<br/>
+
 ## _posts
 ```
 📦_posts
@@ -290,6 +294,8 @@ last modified : 2024-07-18
 제목은 날짜와 제목으로 하며, 뒤에 `.md`를 붙이고, 제목은 웬만하면 영어로 한다. 글 내부에서 YAML Front Matter만 써주면 새 글이 된다. VSC나 다른 IDE를 사용해서 작성하는 게 좋으며 깃허브 마크다운 미리보기 플러그인으로 미리 보면서 쓰면 편하다.  
 내부의 폴더들은 만들어도 되고 안 만들어도 된다. 난 관리할 때의 편리함을 위해 만들었다.
 
+<br/>
+
 ## _sass
 ```
 📦_sass
@@ -306,57 +312,8 @@ last modified : 2024-07-18
  ┃ ┃ ┣ 📜_plum.scss
  ┃ ┃ ┗ 📜_sunrise.scss
  ┃ ┣ 📂vendor
- ┃ ┃ ┣ 📂breakpoint
- ┃ ┃ ┃ ┣ 📂parsers
- ┃ ┃ ┃ ┃ ┣ 📂double
- ┃ ┃ ┃ ┃ ┃ ┣ 📜_default-pair.scss
- ┃ ┃ ┃ ┃ ┃ ┣ 📜_default.scss
- ┃ ┃ ┃ ┃ ┃ ┗ 📜_double-string.scss
- ┃ ┃ ┃ ┃ ┣ 📂resolution
- ┃ ┃ ┃ ┃ ┃ ┗ 📜_resolution.scss
- ┃ ┃ ┃ ┃ ┣ 📂single
- ┃ ┃ ┃ ┃ ┃ ┗ 📜_default.scss
- ┃ ┃ ┃ ┃ ┣ 📂triple
- ┃ ┃ ┃ ┃ ┃ ┗ 📜_default.scss
- ┃ ┃ ┃ ┃ ┣ 📜_double.scss
- ┃ ┃ ┃ ┃ ┣ 📜_query.scss
- ┃ ┃ ┃ ┃ ┣ 📜_resolution.scss
- ┃ ┃ ┃ ┃ ┣ 📜_single.scss
- ┃ ┃ ┃ ┃ ┗ 📜_triple.scss
- ┃ ┃ ┃ ┣ 📜_breakpoint.scss
- ┃ ┃ ┃ ┣ 📜_context.scss
- ┃ ┃ ┃ ┣ 📜_helpers.scss
- ┃ ┃ ┃ ┣ 📜_legacy-settings.scss
- ┃ ┃ ┃ ┣ 📜_no-query.scss
- ┃ ┃ ┃ ┣ 📜_parsers.scss
- ┃ ┃ ┃ ┣ 📜_respond-to.scss
- ┃ ┃ ┃ ┗ 📜_settings.scss
  ┃ ┃ ┣ 📂magnific-popup
- ┃ ┃ ┃ ┣ 📜_magnific-popup.scss
- ┃ ┃ ┃ ┗ 📜_settings.scss
  ┃ ┃ ┗ 📂susy
- ┃ ┃ ┃ ┣ 📂plugins
- ┃ ┃ ┃ ┃ ┣ 📂svg-grid
- ┃ ┃ ┃ ┃ ┃ ┣ 📜_prefix.scss
- ┃ ┃ ┃ ┃ ┃ ┣ 📜_svg-api.scss
- ┃ ┃ ┃ ┃ ┃ ┣ 📜_svg-grid-math.scss
- ┃ ┃ ┃ ┃ ┃ ┣ 📜_svg-settings.scss
- ┃ ┃ ┃ ┃ ┃ ┣ 📜_svg-unprefix.scss
- ┃ ┃ ┃ ┃ ┃ ┗ 📜_svg-utilities.scss
- ┃ ┃ ┃ ┃ ┗ 📜_svg-grid.scss
- ┃ ┃ ┃ ┣ 📂susy
- ┃ ┃ ┃ ┃ ┣ 📜_api.scss
- ┃ ┃ ┃ ┃ ┣ 📜_normalize.scss
- ┃ ┃ ┃ ┃ ┣ 📜_parse.scss
- ┃ ┃ ┃ ┃ ┣ 📜_settings.scss
- ┃ ┃ ┃ ┃ ┣ 📜_su-math.scss
- ┃ ┃ ┃ ┃ ┣ 📜_su-validate.scss
- ┃ ┃ ┃ ┃ ┣ 📜_syntax-helpers.scss
- ┃ ┃ ┃ ┃ ┣ 📜_unprefix.scss
- ┃ ┃ ┃ ┃ ┗ 📜_utilities.scss
- ┃ ┃ ┃ ┣ 📜_su.scss
- ┃ ┃ ┃ ┣ 📜_susy-prefix.scss
- ┃ ┃ ┃ ┗ 📜_susy.scss
  ┃ ┣ 📜_animations.scss
  ┃ ┣ 📜_archive.scss
  ┃ ┣ 📜_base.scss
@@ -378,6 +335,21 @@ last modified : 2024-07-18
  ┃ ┗ 📜_variables.scss
  ┗ 📜minimal-mistakes.scss
 ```
+`vendor` 폴더 내부는 깊게 설명하지 않을 거라 생략했다.  
+`_sass` 폴더는 온갖 scss 파일들이 모여있는 곳이다. scss를 기반으로 css가 만들어진다고 하고, 실제로 scss 파일에 문제가 생기니 css 파일이 없다는 에러가 뜨는 걸로 봐서 둘이 확실히 연결돼있다. 즉 색이나 기존 css 파일의 기능을 하는 파일들이 여기 있는데, 모든 부분이 뭘 하는지 파악했다기 보다는 필요할 때 열어보고 수정하는 식으로 진행해서 크게 설명할 게 없다.  
+참고로 이런 꾸미기 요소는 생각보다 여기저기서 정의돼있어서, override돼서 적용이 안 된다거나 하는 식으로 예상하지 못한 동작이 있을 수 있다. 웬만하면 <u>무작정 바꾸기 말고 개발자 모드를 사용해서 뭘 바꿔야되는지 알아내고 바꾸자.</u>
+
+#### 루트
+루트 디렉토리에는 이름을 보면 어느 부분의 sass 파일인지 파악할 수 있는 `_footer.scss, masthead.scss, search.scss, sidebarr.scss, sidebar.scss` 같은 파일들이 있다. 그 외 몇 개 파일에 대해서 알아보자.  
+`_base.scss`에서는 온갖 잡다한 설정을 할 수 있다. 나는 여기서 하이퍼링크 밑줄 빼기, 밑줄 스타일 바꾸기, backtick 내부 (`여기 안을 뜻한다`) 꾸미기 등을 했다. 특히 backtick 내부 꾸미기는 어디서 하는 건지 몰라서 꽤 헤맸었는데 여기서 하는 거였다! `td > code` 뒤에 중괄호를 열고 원하는 스타일을 넣으면 된다. 그 외에도 문단, 링크, 리스트, 주석, 테이블에 관련된 꾸미기 설정을 바꿀 수 있다. 글자 크기나 본문의 마진도 설정할 수 있으나 변수로 설정돼있고 변수의 정의는 다른 곳에서 돼있기 때문에 굳이 여기서 하드코딩 할 이유는 없다.  
+
+
+#### skins와 vendor
+`skins` 폴더에는 선택할 수 있는 블로그 테마들이 모여있고, 각 테마의 색을 들어가서 직접 변경할 수 있다. `vendor` 폴더는 내부의 파일들을 표시하지 않았는데, 안에 많은 파일들이 있으나 정확한 기능을 알아보지 않았기 때문이다.  
+
+
+<br/>
+
 ## _site
 왜 있는지도 모르겠고, 남의 블로그 리포지토리엔 없다. 삭제해보고 별 일이 생기나 볼 예정이다.
 
