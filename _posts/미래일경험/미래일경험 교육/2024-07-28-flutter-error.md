@@ -23,7 +23,7 @@ last modified : 2024-07-28
 
 `pip install beautifulsoup4`처럼 파이썬 모듈을 깔아준 뒤 코드에서 사용하려고 했을 때 나타난 오류. 설치환경과 컴파일 환경이 다르기 때문에 발생하는 오류다.
 
-#### 해결 방법 
+**해결 방법**
 1. VSC 기준 `ctrl + shift + p`로 명령 커멘트를 열고
 2. Python: Select Interpreter를 입력/선택
 3. pip를 썼던 인터프리터와 같은 인터프리터 선택
