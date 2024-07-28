@@ -5,7 +5,7 @@ excerpt : "layout : post 미적용"
 published: true
 
 categories : 
-    - Blog
+    - Blog Decoration
 
 toc : true
 toc_sticky : true

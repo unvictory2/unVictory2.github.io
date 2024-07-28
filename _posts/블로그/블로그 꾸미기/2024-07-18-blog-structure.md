@@ -7,7 +7,7 @@ toc : true
 toc_sticky : true
 
 categories : 
-    - Blog
+    - Blog Decoration
 
 date : 2024-07-18
 last modified : 2024-07-26

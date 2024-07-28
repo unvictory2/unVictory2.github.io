@@ -5,7 +5,7 @@ excerpt : "Favicon, 제목, 부제목, About, Categories, 검색"
 published: true
 
 categories : 
-    - Blog
+    - Blog Decoration
 
 date : 2024-07-18
 last modified : 2024-07-27
@@ -32,44 +32,4 @@ Masthead 좌상단과 브라우저의 탭에 띄울 이미지를 직접 정할 �
 ![search](https://github.com/user-attachments/assets/0525efa5-66f0-4ae0-a755-aabcb398736b)  
 이렇게만 해도 검색 버튼이 뜨고 누르면 검색 화면으로 이어진다. 어딘가에 `search`가 true면 Minimal Mistakes가 미리 만들어준 검색 버튼을 보여주고, 버튼을 누르면 마찬가지로 미리 만들어진 검색 페이지를 보여주라고 써있기 때문이다.  
 밑의 `search_full_content`는 글의 내용까지 검색할지 여부이다. 바로 밑에 `search_provider`라는 항목도 있는데 설정 안 해줘도 작동한다. 난 설정 안 했다. 
-
-
-<br>
-<br>
-<br>
-
-시간 여유가 있다면 이후 할 거 메모 : 
-
-1. 오류 정리
-2. 블로그 꾸미기 글
-
-
-내 블로그 꾸민 과정 메모  
-1. 밑줄 없애기 base.scss
-2. 본문 너비 바꾸기 _page.scss의 margin과 width (x)
-3. 글자 크기 바꾸기 _reset.scss
-4. 사이드바 너비 바꾸기 _variables.scss
-5. 글자 자간, 스페이스 너비 바꾸기 main.scss
-6. favicon 추가
-7. yaml front matter에 넣을 수 있는 거 모음
-8. 블로그 공부 방법 : ctrl shift f, 개발자도구, 남의꺼 뜯어보기
-9. backtick 내부 색 코드블록 안 설정
-10. 날짜표현방식, subtitle, yaml 기본값 설정 등 config.yml 내부 세팅
-11. 사이드바 추가 (카테고리)
-12. 대문 바꾸기
-13. 검색 기능 만들기
-14. 가운데 정렬
-15. 우상단 메뉴
-16. excerpt 가운데 정렬
-17. 링크 색 방문해도 안 바뀌게
-18. 최근 포스트 글자 크기
-19. 밑줄 설정 
-    
-
-+ 글자 관련  (글자 크기, 자간, 스페이스 너비, 밑줄 없애기, 링크 색 방문해도 안 바뀌게, 최근 포스트 글자 크기, 밑줄 설정, backtick 내부 색 코드블록 안 설정)
-+ 대문 관련 (대문, 가운데정렬)
-+ 전체적인 레이아웃, 너비 관련 (본문, 사이드바, toc)
-+ yaml front matter에 넣을 수 있는 거 모음
-+ 블로그 공부 방법 : ctrl shift f, 개발자도구, 남의꺼 뜯어보기 (개발자도구 키고 ctrl shift m 누르면 모바일 화면 봐짐)
-+ 잡다 : 날짜표현방식, subtitle, yaml 기본값 설정 등 config.yml 내부 세팅, 사이드바 추가 (카테고리)
 

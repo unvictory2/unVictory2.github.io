@@ -5,7 +5,7 @@ excerpt : "가장 쉽게 색을 바꾸는 방법"
 published: true
 
 categories : 
-    - Blog
+    - Blog Decoration
 
 date : 2024-07-18
 last modified : 2024-07-18
