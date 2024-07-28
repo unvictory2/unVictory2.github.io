@@ -19,3 +19,5 @@ last modified : 2024-07-29
 
 문제는 #의 사용이다. #을 계층적으로 써야 toc를 만드는 코드가 오류나지 않는다. 위 사진의 경우에는 #이 2개인 `##루트` 안에 갑자기 #이 4개인 `#### 1. Favicon 관련 파일들` 등을 써서 오류가 난 거다. # 하나를 늘려서 `### 1. Favicon 관련 파일들` 등으로 수정하면 문제가 해결된다.   
 ![fixed_toc](https://github.com/user-attachments/assets/fb2d6950-bab4-475b-bd52-e4b13817563e)
+
+[참고 링크](https://github.com/mmistakes/minimal-mistakes/issues/2892)
