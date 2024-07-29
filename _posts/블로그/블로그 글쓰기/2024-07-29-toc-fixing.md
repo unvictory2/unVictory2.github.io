@@ -3,9 +3,6 @@ layout : single
 title : "toc가 중간부터 깨질 때 해결 방법"
 excerpt : "계층적인 # 사용!"
 published: true
-toc : true
-toc_sticky : true
-
 categories : 
     - Blog Writing
 
