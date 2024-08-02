@@ -1,7 +1,7 @@
 ---
 layout : single
 title : "[미래일경험 프로젝트] 예상 결과물 관련 토의"
-excerpt : "네비게이션 바로 분할된 4개의 화면을 중심으로"
+excerpt : "네비게이션 바로 분할된 4개의 화면을 중심으로, 그에 대한 질의응답"
 published : true
 
 categories : 
