@@ -48,7 +48,7 @@ last modified : 2024-08-02
 - 주제가 클라우드기 때문에 클라우드 서비스를 사용해야 함, aws.
 - 라이센스 충돌 주의.  
  
-![기술 스택](https://github.com/user-attachments/assets/4f9dd288-c18a-4dc4-9299-3b06946ff19b)
+![기술 스택](https://github.com/user-attachments/assets/4f9dd288-c18a-4dc4-9299-3b06946ff19b)  
 
 
 ## 이후 할 일
