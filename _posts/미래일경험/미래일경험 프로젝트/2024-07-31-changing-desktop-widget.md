@@ -7,6 +7,9 @@ published : true
 categories : 
     - Miraework Project
 
+toc : true
+toc_sticky : true
+
 date : 2024-07-31
 last modified : 2024-07-31
 ---
