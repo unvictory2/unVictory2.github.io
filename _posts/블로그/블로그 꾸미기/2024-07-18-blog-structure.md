@@ -407,7 +407,24 @@ last modified : 2024-08-07
     padding-left: 0em;
   }
   ```
-  이런 식으로 본문 너비가 대체 어떻게 정해진 건지, 어떤 식으로 떠있는 건지를 정하는 코드도 여기에 있다. 이 외에도 정말 본문 영역을 구성하는 여러가지에 대한 코드가 있는 걸로 보이는데, 아직 바꿀 일이 없어서 나머지는 확인하지 않았다.
+  이런 식으로 본문 너비가 대체 어떻게 정해진 건지, 어떤 식으로 떠있는 건지를 정하는 코드도 여기에 있다. 
+- 대문에 이미지를 넣는 부분 : 
+  ```scss
+    &--overlay {
+    position: relative;
+    margin-bottom: 2em;
+    padding: 3em 0;
+    @include clearfix;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    -webkit-animation: $intro-transition;
+    animation: $intro-transition;
+    -webkit-animation-delay: 0.25s;
+    animation-delay: 0.25s;
+    ```
+  이렇게 내 대문에 이미지를 어떤 형식으로 넣는지 설정하는 부분도 있는 거 같다!  
+  이 외에도 정말 본문 영역을 구성하는 여러가지에 대한 코드가 있는 걸로 보이는데, 아직 바꿀 일이 없어서 나머지는 확인하지 않았다.
 
 `reset.scss`에서는 화면 크기에 따른 글자 크기를 정의할 수 있다. x-large일 땐 몇 포인트, large일 땐 몇 포인트, medium일 땐 몇 포인트 등.  
 `sidebar.scss`에서는 사이드바와 관련된 설정들을 할 수 있다. 마진을 이용해 사이드바와 본문 사이의 거리를 설정하고, 사이드바 투명도를 조절하고, 프로필 사진의 모양을 바꿨다.  
