@@ -1,6 +1,6 @@
 ---
 layout : single
-title : "블로그 구성 파일들의 역할"
+title : "[핵심] 블로그 구성 파일들의 역할"
 excerpt : "어떤 파일이 뭘 하는지 알아보자"
 published: true
 toc : true
@@ -10,7 +10,7 @@ categories :
     - Blog Decoration
 
 date : 2024-07-18
-last modified : 2024-07-26
+last modified : 2024-08-07
 ---
 
 ## 구조 파악에 도움이 되는 도구들
@@ -18,7 +18,7 @@ last modified : 2024-07-26
 2. 식빵맘님 블로그 및 깃허브의 소스
 3. 브라우저의 개발자 도구 기능과 VSC의 `ctrl+shift+f` 찾기 기능
   
-  놀랍게도 가장 도움이 된 건 초중반엔 식빵맘님이고, 후반에는 개발자 도구 기능이었다. 챗지피티는 엄청난 성능을 보여줄 때가 많지만 이번엔 크게 도움이 되진 않았다.
+  놀랍게도 가장 도움이 된 건 초중반엔 식빵맘님이고, 후반에는 개발자 도구 기능이었다. 챗지피티는 다른 분야에선 엄청난 성능을 보여줄 때가 많지만 이번엔 크게 도움이 되진 않았다.
 
   <br> 
 
@@ -357,7 +357,58 @@ last modified : 2024-07-26
 `_base.scss`에서는 온갖 잡다한 설정을 할 수 있다. 나는 여기서 하이퍼링크 밑줄 빼기, 밑줄 스타일 바꾸기, backtick 내부 (`여기 안을 뜻한다`) 꾸미기 등을 했다. 특히 backtick 내부 꾸미기는 어디서 하는 건지 몰라서 꽤 헤맸었는데 여기서 하는 거였다! `td > code` 뒤에 중괄호를 열고 원하는 스타일을 넣으면 된다. 그 외에도 문단, 링크, 리스트, 주석, 테이블에 관련된 꾸미기 설정을 바꿀 수 있다. 글자 크기나 본문의 마진도 설정할 수 있으나 변수로 설정돼있고 변수의 정의는 다른 곳에서 돼있기 때문에 굳이 여기서 하드코딩 할 이유는 없다.  
 `_forms.scss`는 모든 기능을 파악하진 못했지만 체크박스, 라디오버튼이나 이미지와 관련된 설정을 할 수 있다. 체크박스가 체크됐을 때 디자인을 바꾸기 위해 수정한 적이 있다.  
 `_navigation.scss`에도 여러 코드가 있지만 난 그 중 breadcrumbs와 관련된 설정을 수정했었다. breadcrumbs의 마진, 패딩이나 글씨체를 바꿀 수 있다.  
-`page.scss`에는 본문의 여백을 바꿀 수 있나 보러 갔었다. `#main`에서 바꿨더니 본문뿐만이 아니라 사이드바와 bio까지 포함해서 여백이 들어가서 포기했었다. 근데 다시 보니 `body`나 `initial_content`에서 바꾸면 될지도 모르겠다. 어쨌든 난 수정하지 않았다.
+
+`page.scss`는 예전엔 뭔지 몰라서 그냥 냅뒀으나 오늘 새로운 점을 꽤 찾아내 별도의 문단으로 쓴다. 이 파일에서는 <u>글의 본문 영역과 관련된 온갖 설정</u>을 할 수 있다. 
+- 너비 관련 : 잘 몰랐던 땐 `_variables.scss`에서 breakpoint를 수정했으나, 잘못된 방법이다. 그럼에도 불구하고 본문의 너비를 넓힌다는 목적을 달성할 수 있었던 건 둘이 관련이 있는 건 사실이기 때문이다. 바람직한 방법은 `page.scss`의
+  ```scss
+  .page__inner-wrap {
+    float: left;
+    margin-top: 1em;
+    margin-left: 0;
+    margin-right: 0;
+    width: 100%; // 본문 너비
+    clear: both;
+    ```
+    이 부분을 수정하는 거다. 바로 밑의 `.page_share`를 수정해도 바뀌긴 하지만 바람직한 방법은 아닌듯하다. 이러면 우측으로만 본문 영역이 늘어나는데, 좌측으로 늘리고 싶다면 본문 영역 전체(본문+사이드바+toc)의 좌측 마진을 줄이면 된다.
+- 영역 전체 마진 관련 : 
+  ```scss
+  #main {
+  @include clearfix;
+  margin-left: 8%; // 좌우 여백(사이드바와 본문 사이가 아니라, 사이드바보다도 왼쪽)
+  margin-right: 8%;
+  padding-left: 1em;
+  padding-right: 1em;
+  -webkit-animation: $intro-transition;
+  animation: $intro-transition;
+  max-width: 100%;
+  -webkit-animation-delay: 0.15s;
+  animation-delay: 0.15s;
+
+  @include breakpoint($x-large) {
+    max-width: $max-width;
+    margin-left: 12%;
+    margin-right: 12%;
+    }
+  }
+  ```
+  이 부분을 수정하면 된다. margin 관련된 부분으로 본문 영역을 제외한 빈 공간의 너비를 조정할 수 있다. 밑의 `@include breakpoint($x-large)`는 화면 크기가 클 경우 별도의 마진값을 주기 위해 작성됐다. 참고로 `max-width` 같은 경우는 바꿔도 다른 곳에서 override 되는지 외형에 영향을 주지 못한다.
+- 본문 너비를 정하는 공식 : 
+  ```scss
+    padding-left: 1em;
+  @include breakpoint($large) {
+    float: right;
+    width: calc(100% - #{$right-sidebar-width-narrow});
+    padding-right: $right-sidebar-width-narrow;
+  }
+
+  @include breakpoint($x-large) {
+    width: calc(100% - #{$right-sidebar-width});
+    padding-right: $right-sidebar-width;
+    padding-left: 0em;
+  }
+  ```
+  이런 식으로 본문 너비가 대체 어떻게 정해진 건지, 어떤 식으로 떠있는 건지를 정하는 코드도 여기에 있다. 이 외에도 정말 본문 영역을 구성하는 여러가지에 대한 코드가 있는 걸로 보이는데, 아직 바꿀 일이 없어서 나머지는 확인하지 않았다.
+
 `reset.scss`에서는 화면 크기에 따른 글자 크기를 정의할 수 있다. x-large일 땐 몇 포인트, large일 땐 몇 포인트, medium일 땐 몇 포인트 등.  
 `sidebar.scss`에서는 사이드바와 관련된 설정들을 할 수 있다. 마진을 이용해 사이드바와 본문 사이의 거리를 설정하고, 사이드바 투명도를 조절하고, 프로필 사진의 모양을 바꿨다.  
 `_syntax.scss`에서는 backtick 3개로 둘러쌓인 코드블록,
@@ -367,6 +418,8 @@ last modified : 2024-07-26
 의 외형에 대한 설정을 할 수 있다. 뭔가를 수정하진 않았고 backtick 하나인 코드블록 스타일을 여기서 바꾸는 건가 싶어 살펴봤었다.  
 `_variables.scss`에선 다른 여러 파일에서 쓰는 변수들이 등장한다. 예를 들어 글자 크기인 `$type-size-1~8`, 곳곳에서 쓰이는 `$gray`의 정의, 화면 크기별 toc의 너비 등이 정의된다. 결국 override 되지만 그렇지 않을 경우 사용됐을 값들도 있다. 예를 들어 테마가 적용되지 않았을 경우 쓸 색들, 링크색, syntax 색이 있다.  
 또 주석으로 `Breakpoints`라고 돼있는 부분이 있다. 화면 크기에 따라 다른 픽셀값이 적혀있는데 이 값은 본문이 몇 픽셀까지 공간을 차지할 수 있는지, 즉 <u>본문의 너비</u>다. 예전에는 본문의 너비를 바꾸기 의해 `_archive.scss`나 `_page.scss`에서 `width`를 바꿨었는데, 그러면 하나하나 바꿔줘야 하기 때문에 안 좋은 방법이다. `width`는 100%로 냅두고 이걸 바꾸면 다같이 바꿀 수 있다. 'width = 100%면 그 100%는 몇 픽셀인데?'라는 궁금증이 있으면 볼 부분.
+
+이 부분은 최근 틀렸다는 걸 깨달았다. `breakpoint`는 화면 크기에 따라 화면을 `$large`같은 여러 변수로 나눈다. 이 변수들은 다른 코드들에서 화면 크기에 따라 다른 구성 요소들의 크기를 바꾸는 데 사용된다. 사이트 외형을 바꾸려고 파일들을 열어보다 보면 `$large`나 `$x-large`같은 게 자주 튀어나오는데 그걸 정의하는 곳이 여기다. 참고로 여기서 나오는 픽셀은 인터넷 브라우저의 해상도지 모니터의 해상도나 크기와는 연관이 없다.
 
 ### skins와 vendor
 `skins` 폴더에는 선택할 수 있는 블로그 테마들이 모여있고, 각 테마의 색을 들어가서 직접 변경할 수 있다. `vendor` 폴더는 내부의 파일들을 표시하지 않았는데, 안에 많은 파일들이 있으나 정확한 기능을 알아보지 않았기 때문이다.  

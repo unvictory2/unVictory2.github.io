@@ -44,7 +44,8 @@ $medium-wide: 900px !default;
 $large: 1024px !default;
 $x-large: 1450px !default;
 ```
-개별 페이지 레이아웃에서도 width가 100%로 돼있는 걸 바꿀 수 있긴 하다. 위의 내용은 그 100%가 몇 픽셀인지 설정하는 거다.
+사실 이건 화면 크기를 구분하는 기준이지만, `_page.scss`에서 이 값을 기준으로 포스트 영역을 지정하기 때문에 관련이 있다. 잘 모를 때 바꿔서 냅두게 됐다. 그러나 이 값을 직접 바꾸는 건 안 좋은 생각이다. 만약 지금 바꿔야 된다면 `_page.scss`에 가서 수정할듯 하다.   
+개별 페이지나 레이아웃에서도 width가 100%로 돼있는 걸 바꿀 수 있긴 하다.
 ### 내용 설정
 
 
@@ -56,7 +57,7 @@ $x-large: 1450px !default;
 기본 형식에 카테고리만 추가된 사이드바다. 카테고리 추가는 [식빵맘님 블로그 글](https://ansohxxn.github.io/blog/category/)을 참고했다. 사이드바를 bio라고 부르기도 하고, toc를 right_sidebar로 부르기도 하다보니 좀 헷갈린다.  
 
 ### 너비 변경
-`_sass\minimal-mistakes\_sidebar.scss`에서 `@include breakpoint($large) {` 혹은 ` @include breakpoint($x-large) {`의 width를 바꿔주면 된다. 화면별로 너비가 다르기 때문에 저렇게 나뉘어져 있다.
+`_sass\minimal-mistakes\_sidebar.scss`에서 `@include breakpoint($large) {` 혹은 `@include breakpoint($x-large) {`의 width를 바꿔주면 된다. 화면별로 너비가 다르기 때문에 저렇게 나뉘어져 있다.
 
 ### 내용 변경
 사이드바의 내용은 루트의 `_config.yml`에서 변경할 수 있다. 

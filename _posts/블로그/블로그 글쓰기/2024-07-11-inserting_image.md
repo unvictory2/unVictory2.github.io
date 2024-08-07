@@ -8,7 +8,7 @@ categories :
     - Blog Writing
 
 date : 2024-07-11
-last modified : 2024-07-11
+last modified : 2024-08-08
 
 # header:
 #   teaser: /assets/images/random_image1.jpg
@@ -24,7 +24,6 @@ last modified : 2024-07-11
 내 컴퓨터에 있는 이미지를 복사하고, 여기다가 붙여넣기 한다.
 <br/><br/>
 
-![alt text](image.png)
 ![코드](https://github.com/unvictory2/unVictory2.github.io/assets/117062169/cb5396ec-cde3-4b1b-b7a5-217d2778a7bf)
 
 그럼 이런 식으로 업로드 중이라고 뜨더니, 텍스트 형식으로 바뀐다. 사진에서는 이미지를 총 4장 올린 거다. 각 이미지는 앞의 `!`로 구분할 수 있다.  
@@ -39,6 +38,11 @@ last modified : 2024-07-11
 
 깨져서 나온 이미지 밑에 새로 만든 이미지 주소를 추가했다. 그리고 아직 커밋 전이지만 이미지 원본은 휴지통으로 보냈다.  
 결론은 성공이다! 로컬에서 삭제해도 상관없다.  
+
+<hr>
+**추가**  
+`<img src = "https://github.com/user-attachments/assets/2e1408b2-eb58-4b27-bea6-8bb199e4f0f3" alt = "sc" width = "300" style="border: 2px solid black;"/>`  
+같은 방식도 기억해놔야 한다. 이 방식을 쓰면 <u>이미지의 크기를 조절할 수 있고, 테두리도 줄 수 있다.</u> 이미지 배경이 블로그 배경과 같은 경우나 너무 큰 경우 유용하다.
 
 <hr>
 보고 따라한 출처 :  

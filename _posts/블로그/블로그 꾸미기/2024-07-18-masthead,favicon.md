@@ -28,7 +28,7 @@ Masthead 좌상단과 브라우저의 탭에 띄울 이미지를 직접 정할 �
 우리가 그냥 링크와 이름만 치면 그걸 보여주는 동작은 `_includes\masthead.html`에서 한다. 뭔가 바꾸고 싶다면 살펴보자.
 
 #### 검색
-`_config.yml`에서 `search: true`로 바꿔준다.
+`_config.yml`에서 `search: true`로 바꿔준다.  
 ![search](https://github.com/user-attachments/assets/0525efa5-66f0-4ae0-a755-aabcb398736b)  
 이렇게만 해도 검색 버튼이 뜨고 누르면 검색 화면으로 이어진다. 어딘가에 `search`가 true면 Minimal Mistakes가 미리 만들어준 검색 버튼을 보여주고, 버튼을 누르면 마찬가지로 미리 만들어진 검색 페이지를 보여주라고 써있기 때문이다.  
 밑의 `search_full_content`는 글의 내용까지 검색할지 여부이다. 바로 밑에 `search_provider`라는 항목도 있는데 설정 안 해줘도 작동한다. 난 설정 안 했다. 
