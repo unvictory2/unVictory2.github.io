@@ -148,7 +148,7 @@ $small: 600px !default;
 $medium: 768px !default;
 $medium-wide: 900px !default;
 $large: 1024px !default; // 내 14인치 노트북의 크롬 해상도 1280px x 559.33px. 
-$x-large: 1450px !default; // 본문이 몇 픽셀까지 공간을 차지할 수 있는지, 전체 설정이라 _archive.scss나 _page.scss에서 width %를 100으로 냅두고 이걸 바꾸면 다같이 바꿀 수 있다. 즉 width = 100%라고 할 때 그 100%의 값을 설정한다고 보면 된다.
+$x-large: 1450px !default; // 본문이 몇 픽셀까지 공간을 차지할 수 있는지, 전체 설정이라 _archive.scss나 _page.scss에서 width %를 100으로 냅두고 이걸 바꾸면 다같이 바꿀 수 있다. 즉 width = 100%라고 할 때 그 100%의 값을 설정한다고 보면 된다. 내 27인치 데스크톱의 크롬 해상도 1920 x 919px
 $max-width: $x-large !default;
 
 /*

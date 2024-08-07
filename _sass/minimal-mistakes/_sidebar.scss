@@ -18,7 +18,7 @@
 
   @include breakpoint($large) {
     float: left;
-    width: calc(#{$right-sidebar-width-narrow} - 1em);
+    width: calc(#{$right-sidebar-width-narrow} - 1em); // large 화면에서 bio 사이드바 너비
     opacity: 0.8; // 사이드바 투명도, 0이면 안 보임 1이면 뚜렷함 낮아질수록 뿌애짐 기본값 0.75
     -webkit-transition: opacity 0.2s ease-in-out;
     transition: opacity 0.2s ease-in-out;
@@ -37,7 +37,7 @@
   }
 
   @include breakpoint($x-large) {
-    width: calc(#{$right-sidebar-width} - 1em);
+    width: calc(#{$right-sidebar-width} - 1em); // x-large 화면에서 bio 사이드바 너비
   }
 
   > * {
