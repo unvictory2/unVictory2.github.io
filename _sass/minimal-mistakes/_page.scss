@@ -4,8 +4,8 @@
 
 #main {
   @include clearfix;
-  margin-left: 12%; // 좌우 여백(사이드바와 본문 사이가 아니라, 사이드바보다도 왼쪽)
-  margin-right: 12%;
+  margin-left: 8%; // 좌우 여백(사이드바와 본문 사이가 아니라, 사이드바보다도 왼쪽)
+  margin-right: 8%;
   padding-left: 1em;
   padding-right: 1em;
   -webkit-animation: $intro-transition;
@@ -14,8 +14,14 @@
   -webkit-animation-delay: 0.15s;
   animation-delay: 0.15s;
 
+  @include breakpoint($large) {
+
+  }
+
   @include breakpoint($x-large) {
     max-width: $max-width;
+    margin-left: 12%;
+    margin-right: 12%;
   }
 }
 
@@ -36,6 +42,7 @@ body {
 }
 
 .page {
+  padding-left: 1em;
   @include breakpoint($large) {
     float: right;
     width: calc(100% - #{$right-sidebar-width-narrow});
@@ -45,6 +52,7 @@ body {
   @include breakpoint($x-large) {
     width: calc(100% - #{$right-sidebar-width});
     padding-right: $right-sidebar-width;
+    padding-left: 0em;
   }
 
   .page__inner-wrap {

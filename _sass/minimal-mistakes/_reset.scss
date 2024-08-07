@@ -10,13 +10,13 @@ html {
   background-color: $background-color;
   font-size: 16px;
 
-  // 화면 크기에 따른 글자 크기
+  // 화면 크기에 따른 글자 크기, 각자 글자 크기 설정 있긴 하지만 대략적으로 바꿔준다고 보면 될듯
   @include breakpoint($medium) {
-    font-size: 16px;
+    font-size: 13px;
   }
 
   @include breakpoint($large) {
-    font-size: 16px;
+    font-size: 15px;
   }
 
   @include breakpoint($x-large) {
