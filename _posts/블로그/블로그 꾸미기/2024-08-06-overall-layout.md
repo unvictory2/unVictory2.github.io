@@ -1,7 +1,7 @@
 ---
 layout : single
 title : "전체적인 레이아웃"
-excerpt : "홈 화면에 splash 형식으로 이미지 넣기, Recent Posts, Sidebar, toc 너비"
+excerpt : "Splash 이미지 대문, Recent Posts, Sidebar, toc, 좌우 마진"
 published: true
 
 categories : 
