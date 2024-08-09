@@ -14,6 +14,8 @@ body {
   color: $text-color;
   font-family: $global-font-family;
   line-height: 1.5;
+  letter-spacing: 0.04em; // 자간
+  word-spacing: 0.15em; // 공백 너비
 
   &.overflow--hidden {
     /* when primary navigation is visible, the content in the background won't scroll */
