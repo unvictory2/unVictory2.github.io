@@ -1,7 +1,7 @@
 ---
 layout : single
 title : "글자 관련 설정"
-excerpt : ""
+excerpt : "글자, 링크, 코드블록, 밑줄, 날짜 표현 방식, 글 YAML 기본 설정 등"
 published: true
 
 categories : 
@@ -15,6 +15,8 @@ last modified : 2024-08-09
 ---
 폰트 변경은 [예전 글](https://unvictory2.github.io/blog%20decoration/changing-font/)에서 다뤘다.  
 이 글에서 다룰 내용들은 대부분 `_sass\minimal-mistakes\_base.scss`내에서 이뤄진다.
+
+<br>
 
 ## `_base.scss` 내부
 ### 자간, 스페이스 너비, 줄 사이 너비 설정  
@@ -170,3 +172,30 @@ body {
 }
 ```
 지금은 _base.scss에서 `body`를 찾아 거기다가 옮겼다. 이걸 어디서 include하라는 얘기를 들은 것도 같은데 난 처음부터 `main.scss`가 존재했어서 별다른 설정 없이 됐던 것 같다.
+
+### 날짜 표현 방식
+루트의 `_config.yml`로 간다. 
+```yml
+date_format: "%Y-%m-%d" # 날짜 표현 방식. https://www.shortcutfoo.com/app/dojos/ruby-date-format-strftime/cheatsheet 참고
+```
+이 부분을 수정한다.
+
+### YAML Front Matter 기본값 설정
+마찬가지로 `_config.yml`에서 설정한다. 여기서 설정해주면 개별 포스트를 쓸 때 언급하지 않는 경우 이 기본 설정대로 간다...고 생각했으나 지금 실험해본 결과 꼭 그렇지만은 않다. 하지만 자세한 원리를 알아내기엔 지쳤다.
+```yml
+# Defaults
+defaults:
+  # _posts
+  - scope:
+      path: ""
+      type: posts
+    values: 
+      layout: single
+      author_profile: true
+      read_time: true
+      comments: true
+      show_date: true
+      share: false
+      related: true
+      sidebar_main: true
+```
