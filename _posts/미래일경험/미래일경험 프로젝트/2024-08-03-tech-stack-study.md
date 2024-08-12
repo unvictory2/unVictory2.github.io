@@ -13,7 +13,7 @@ toc_sticky : true
 date : 2024-08-03
 last modified : 2024-08-12
 ---
-
+.
 ![기술 스택](https://github.com/user-attachments/assets/4f9dd288-c18a-4dc4-9299-3b06946ff19b)  
 
 내가 이해한대로 각 부분의 역할을 설명하겠다. 아직 실제 개발을 해보지 않았기 때문에 지식이 얕거나 틀릴 수도 있다.
