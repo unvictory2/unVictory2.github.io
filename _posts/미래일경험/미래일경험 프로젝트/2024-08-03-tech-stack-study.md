@@ -25,7 +25,7 @@ last modified : 2024-08-12
 ### Firebase
 Firebase는 데이터베이스, 인증, 파일 저장 등의 코드가 대부분의 프로젝트에서 유사하다는 점에서 착안한 서비스다. 어차피 비슷하니까 개발자가 매번 만들 필요 없이 Firebase에서 대신 만들어준다는 거다!  
 더 자세히 찾아보니 Spring Boot나 MySQL에서 하는 일을 대체할 수 있을 거 같은데, 뭐하러 Firebase를 냅두고 딴 걸 쓰는 걸까? 플러터를 교육해주신 강사님께 여쭤봤다.
-![kakao_screenshot1722928628599](https://github.com/user-attachments/assets/93aade0e-704a-4166-9996-58dc72409e45)
+![kakao_screenshot1722928628599](https://github.com/user-attachments/assets/93aade0e-704a-4166-9996-58dc72409e45)  
 짧게 요약하자면, Firebase를 쓰면 편하지만 제약사항도 생기기에 현업에서는 잘 쓰지 않는다는 거다. 우리 프로젝트에선 인증 부분만 Firebase를 쓰고 다른 부분에선 쓰지 않기로 했다.
 
 ### RestAPI
