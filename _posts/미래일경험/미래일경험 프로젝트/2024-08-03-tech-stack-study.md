@@ -11,7 +11,7 @@ toc : true
 toc_sticky : true
 
 date : 2024-08-03
-last modified : 2024-08-06
+last modified : 2024-08-12
 ---
 
 ![기술 스택](https://github.com/user-attachments/assets/4f9dd288-c18a-4dc4-9299-3b06946ff19b)  
