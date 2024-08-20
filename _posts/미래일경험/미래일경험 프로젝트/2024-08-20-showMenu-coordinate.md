@@ -7,6 +7,9 @@ published : true
 categories : 
     - Miraework Project
 
+toc : true
+toc-sticky: true
+
 date : 2024-08-20
 last modified : 2024-08-20
 ---
@@ -78,7 +81,7 @@ return GestureDetector(
 
 ## 최종 해결
 결국 패키지를 직접 수정하는 방식으로 해결했다.  
-
+수정하고 적용하는 방식에 대해서는 [별도의 글](https://unvictory2.github.io/miraework%20project/customizing-package/)에 정리했다. 여기선 뭘 수정했는지 정리하겠다.
 
 
 ### 
