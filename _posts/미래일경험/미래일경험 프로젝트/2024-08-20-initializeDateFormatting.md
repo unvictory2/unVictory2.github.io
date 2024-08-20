@@ -20,7 +20,7 @@ String _formatDate(DateTime date) {
 ```  
 이런 식으로 하면 된다. 윗줄은 8.20을 만들어주고, 아래쪽은 (요일)을 한들어준다. 근데 영어가 아니라 한국어로 요일을 표현하려고 하기 때문에 이대로 실행하면 오류가 난다. (실행 시에는 오류가 안 나지만 저 함수를 실행할 일이 생기면 난다)
 
-```debug console
+```
 ════════ Exception caught by gesture ═══════════════════════════════════════════
 Locale data has not been initialized, call initializeDateFormatting(<locale>).
 ════════════════════════════════════════════════════════════════════════════════

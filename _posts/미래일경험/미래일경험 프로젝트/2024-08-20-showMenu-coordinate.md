@@ -54,7 +54,7 @@ void _showDailySchedule(BuildContext context,
 
 이걸 한참 고민했었는데 희망적인 부분을 발견했다. `GestureDetector`와 유사한 동작을 하는 `onCellTap`이라 그런지 터치시 디버그 콘솔에 관련 내용을 출력했다.  
 
-```debug console
+```
 Handler: "onTap"
 Recognizer: TapGestureRecognizer#3e971
     debugOwner: GestureDetector
