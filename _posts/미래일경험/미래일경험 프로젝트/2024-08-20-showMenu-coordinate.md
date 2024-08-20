@@ -83,5 +83,80 @@ return GestureDetector(
 결국 패키지를 직접 수정하는 방식으로 해결했다.  
 수정하고 적용하는 방식에 대해서는 [별도의 글](https://unvictory2.github.io/miraework%20project/customizing-package/)에 정리했다. 여기선 뭘 수정했는지 정리하겠다.
 
+### 목표
+`Month View`의 `onCellTap`이 원래는 좌표값을 전달하지 않는데 전달하게 변경.  
+이를 달성하기 위해서는 
+- 콜백함수들이 정의돼있는 `lib\src\typedefs.dart`와, 
+- 달력 위젯 파일인 `lib\src\month_view\month_view.dart`  
 
-### 
+를 수정해야 한다. 
+
+### 사전 지식
+콜백 함수란 "다른 함수가 실행을 끝난 뒤 실행되는 함수"라고만 알면 될 거 같다. 비동기 처리와 관련됐다는 건 이해했지만 비동기 처리 자체에 대한 이해가 낮기 때문에 지금 이해하고 가기는 어렵다.  
+`tyedefs.dart`에서 온갖 콜백 함수가 정의되고, 각 위젯을 정의하는 개별 파일들에서 다양한 함수들이 이 콜백 함수들을 사용한다. 하나의 콜백 함수를 여러 개의 개별 함수들이 사용할 수 있다.  
+
+### 해결 과정
+
+1. `lib\src\typedefs.dart`
+    ```dart
+    typedef CellTapCallbackExtended<T extends Object?> = void Function(
+        List<CalendarEventData<T>> events, DateTime date, Offset offset);
+    ```
+    `CellTapCallbackExtended`라는 새로운 콜백 추가. 기존의 `CellTapCallback`에 `Offset offset`이라는 인자 하나만 추가함. 굳이 새로운 콜백을 추가한 이유는 기존의 콜백을 쓰는 함수가 `onCellTap`이 유일하지 않기 때문에 다른 함수들에게 영향을 주지 않기 위해서다.
+
+2. `lib\src\month_view\month_view.dart`  
+
+    온갖 onCellTap 관련 부분에서 콜백 타입을 수정해줌.  
+
+    `class MonthView<T extends Object?>`에서, 
+    ```dart
+    final CellTapCallbackExtended<T>? onCellTap;
+    ```
+
+    `class _MonthPageBuilder<T> `에서도.
+    ```dart
+    final CellTapCallbackExtended<T>? onCellTap;
+    ```
+
+    이후 하단의 `build`에서 실제 전달값 수정. `globalPosition`이 아닌 `localPosition`을 전달하면 해당 셀 내에서의 위치값을 전달하기 때문에 부적절하다.
+    ```dart
+    return GestureDetector(
+                onTapDown: (details) => onCellTap?.call(
+                    events, monthDays[index], details.globalPosition), 
+    ```
+3. 내 프로젝트의 calendar.dart에서 처리  
+   이전에 좌표가 없어서 못 했던 작업을 처리하면 된다.
+    ```dart
+    body: MonthView(
+            useAvailableVerticalSpace: true, // 잘리는 거 방지
+            onCellTap: (events, date, offset) {
+              _showDailySchedule(context, events, date, offset);
+            },
+          ),
+    ```
+    MonthView에서 특정 날짜를 선택하면 context, 해당 날짜, 일정, 터치 위치를 `_showDailySchedule`에 인자로 전달한다.
+    ```dart
+    void _showDailySchedule(BuildContext context,
+        List<CalendarEventData<Object?>> events, DateTime date, Offset offset) {
+      final RenderBox overlay =
+          Overlay.of(context).context.findRenderObject() as RenderBox;
+
+      final RelativeRect position = RelativeRect.fromLTRB(
+        offset.dx,
+        offset.dy,
+        MediaQuery.of(context).size.width - offset.dx,
+        MediaQuery.of(context).size.height - offset.dy,
+      );
+    ```
+    해당 함수에서는 오버레이 세팅을 하고, 얻어온 좌표로 어디다가 메뉴를 띄울지 계산한다. 오버레이 세팅을 해줘야 테두리를 클릭해도 자동으로 메뉴가 잘리지 않고 테두리 내에 뜨기 때문에 중요하다.
+    ```dart
+    showMenu(
+          context: context,
+          position: position,
+          items: [
+    ```
+    이후 `showMenu`에서는 위에서 설정한 `position`을 그냥 주면 되고 아이템을 나열하기 시작하면 된다. 끝!
+
+![menu](https://github.com/user-attachments/assets/a7567374-e7dd-4a39-a34f-54a77bd80f82)
+
+터치하면 터치한 위치에 메뉴가 뜬다!
