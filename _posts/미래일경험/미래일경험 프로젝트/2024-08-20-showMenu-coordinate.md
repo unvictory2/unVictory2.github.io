@@ -53,6 +53,7 @@ void _showDailySchedule(BuildContext context,
 지금 내 문제와 관련이 있는 건 그 밑의 `showMenu`인데 <u>여기서 `position`을 어떻게 줘야 될지 모르겠다는 거다.</u> 내가 터치한 좌표를 `onCellTap`에서 이 함수를 부를 때 인자로 줘야 될 거 같다. 근데 내가 터치한 좌표를 도대체 어떻게 알아내야 하는 걸까... `GestureDetector`를 쓰면 된다는 건 아는데, `GestureDetector`와 `onCellTap`을 같이 썼더니 둘 중 하나만 동작한다. 터치라는 이벤트를 뺏어가서 그런듯.  
 
 이걸 한참 고민했었는데 희망적인 부분을 발견했다. `GestureDetector`와 유사한 동작을 하는 `onCellTap`이라 그런지 터치시 디버그 콘솔에 관련 내용을 출력했다.  
+
 ```debug console
 Handler: "onTap"
 Recognizer: TapGestureRecognizer#3e971
@@ -64,6 +65,7 @@ Recognizer: TapGestureRecognizer#3e971
     button: 1
     sent tap down
 ```
+
 보면 얘도 `Offset` 관련 정보를 가지고 있다! 이걸 어떻게 빼올지만 고민하면 될듯. 남이 만든 패키지를 쓰는 것도 쉽진 않은 거 같다. 또다른 문제는 이 메시지가 첫 터치시에만 뜬다는 거다. `onCellTap`이 한 번만 실행되는 건 아니던데 왜일까... `Handler`라고 적혀있는 `onTap`은 한 번만 실행되는 건가...? 공부가 필요하다... 
 
 <hr>
