@@ -1,7 +1,7 @@
 ---
 layout : single
-title : "[미래일경험 프로젝트] 문제 해결 - 패키지 터치 함수 사용시 터치 좌표 알아내기"
-excerpt : "GestureDetector와 동시 사용 불가시 어떻게 해야 되는 걸까"
+title : "[미래일경험 프로젝트] 문제 해결 - Calendar View 패키지 수정하기"
+excerpt : "onCellTap 함수가 좌표도 전달하게 수정"
 published : true
 
 categories : 
@@ -10,7 +10,8 @@ categories :
 date : 2024-08-20
 last modified : 2024-08-20
 ---
-
+그래서 결국 어떻게 했다는 건데? 라는 의문이 든다면 제일 밑의 최종 해결을 보면 된다.
+## 문제사항과 고민 과정
 내가 개발을 맡은 데스크톱 위젯은 이렇게 생겼다.   
 
 ![figma_calendar](https://github.com/user-attachments/assets/0058f358-126e-4de2-92cf-3be512c5dfbc)  
@@ -64,6 +65,7 @@ Recognizer: TapGestureRecognizer#3e971
 
 <hr>
 
+## 공부 후 수정
 공부 후 수정한다. 위의 내용은 내가 `onCellTap`에게 처리를 맡긴 부분 외의 부분들 터치했을 때 한 번만 나타났고, 이후에는 범위 밖이라고 디버그 콘솔에 에러 메시지가 떴다. 또 `Handler`의 이름이나 `debugOwner`를 봤을 때 `GestureDetector`가 띄운 메시지다. 즉 `onCellTap`이랑은 무관하다는 뜻.  
 
 결국 `calendar view` 패키지 소스 코드로 가서 `onCellTap`의 코드를 확인했다. 경로는 `flutter_calendar_view/lib/src/month_view
@@ -73,3 +75,10 @@ return GestureDetector(
             onTap: () => onCellTap?.call(events, monthDays[index]),
 ```
 같은 식으로 돼있었다. 조금만 바꾸면 터치 좌표도 주게 바꿀 수 있을 거 같다. 그런데 PR한다고 받아들여 질지 모르겠기 때문에 그냥 내 임의로 바꿔야 될 거 같은데, 그럼 어떻게 `import` 해야되는지와 다른 환경에서도 정상적으로 작동할지를 모르겠다. 
+
+## 최종 해결
+결국 패키지를 직접 수정하는 방식으로 해결했다.  
+
+
+
+### 
