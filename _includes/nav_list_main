@@ -45,6 +45,15 @@
                 {% endif %}
             {% endfor %}
         </ul>
+        <!--프롬프트 엔지니어링-->
+        <span class="nav__sub-title">프롬프트 엔지니어링</span>
+            <ul>
+                {% for category in site.categories %}
+                    {% if category[0] == "Prompt Engineering" %}
+                        <li><a href="/categories/prompt_engineering" class="">프롬프트 엔지니어링 ({{ category[1].size }})</a></li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
         <!--etc 그룹-->
         <span class="nav__sub-title">etc</span>
             <ul>
