@@ -275,7 +275,8 @@ last modified : 2024-08-07
  ┗ 📜tags.html
 ```
 여기는 블로그 개별 글들의 레이아웃에 대한 html 파일들이 있다. 재밌는 건 이 레이아웃 파일들이 서로 연관돼있는 레이아웃도 있다는 점이다. 예를 들어 `categories.html`의 레이아웃은 archive기 때문에, `archive.html`을 기반으로 한다. `archive.html`의 레이아웃은 `default.html`이기 때문에 결국 `categories.html`은 2개의 다른 레이아웃 파일을 참고한다.  
-이 레이아웃 파일들은 `_includes` 폴더의 루트에 있는 여러 html 파일들을 가져와서 사용한다. 예를 들어 `default.html`은 `head.html, masthead.html, search_form.html, scripts.html,footer.html` 등 다양한 html 파일들을 가져온다. <u>사실상 레이아웃은 `_includes` 폴더에 있는 개별 위젯들을 어떻게 배치할지 정해둔 파일이라고 판단된다.</u> 아마 그래서 폴더 이름도 includes인 게 아닐까? 단독으로 사용되기 보다는 여기저기서 include 되니까.
+이 레이아웃 파일들은 `_includes` 폴더의 루트에 있는 여러 html 파일들을 가져와서 사용한다. 예를 들어 `default.html`은 `head.html, masthead.html, search_form.html, scripts.html,footer.html` 등 다양한 html 파일들을 가져온다. <u>사실상 레이아웃은 `_includes` 폴더에 있는 개별 위젯들을 어떻게 배치할지 정해둔 파일이라고 판단된다.</u> 아마 그래서 폴더 이름도 includes인 게 아닐까? 단독으로 사용되기 보다는 여기저기서 include 되니까.  
+* 2024.9.17 추가 : 오늘 블로그의 스크롤바 형식을 바꿨는데 `default.html`의 `head` 태그 안에 `style` 태그를 넣어줘서 바꿨다!
 
 <br/>
 
