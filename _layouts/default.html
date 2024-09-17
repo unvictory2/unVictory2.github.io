@@ -14,6 +14,20 @@
     <link rel="preload" as="style" href="{{ '/assets/css/main.css' | relative_url }}">
     {% include head.html %}
     {% include head/custom.html %}
+
+    <!-- 스크롤바 관련 내용, 오류 나도 괜찮다 -->
+    <style> 
+      ::-webkit-scrollbar{width: 11px;} /* width */
+      ::-webkit-scrollbar-track {background-color:#ffffff; border-radius: 12px;} /* 스크롤바 뒷배경 */
+      ::-webkit-scrollbar-thumb {background-color:#cfc1c1; border-radius: 12px;} /* 스크롤바 색 */
+      /* #5e6265 식방 #fff3f3 배경석*/
+      ::-webkit-scrollbar-thumb:hover {background: #898FCB;} /* onMouseHover */
+      ::-webkit-scrollbar-button:start:decrement,::-webkit-scrollbar-button:end:increment 
+      {
+          width:12px;height:12px;background:transparent;}
+      } 
+    </style>
+
   </head>
 
   <body class="layout--{{ page.layout | default: layout.layout }}{% if page.classes or layout.classes %}{{ page.classes | default: layout.classes | join: ' ' | prepend: ' ' }}{% endif %}">
