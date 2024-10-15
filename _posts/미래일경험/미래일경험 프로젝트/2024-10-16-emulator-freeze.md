@@ -22,5 +22,8 @@ last modified : 2024-10-16
 - 에뮬레이터 종료를 작업관리자나 `adb emu kill` 커멘드로 하기
 인 거 같다. 첫 번째 방법은 했더니 약관 동의 안 한 게 있다고 해서 그거만 했다. 
 
-[참고링크1](https://www.reddit.com/r/androiddev/comments/8vy1vz/anyone_have_problems_with_android_studio_freezing/)
+오 첫 번째 방법만 하고 지금 끄기 버튼으로 껐는데 컴퓨터가 멀쩡하다. 드디어 멀쩡해진 건가? 다음엔 안 되면 두 번째 방법으로 하는 게 좋겠다. 저건 매번 해야되는 거라 훨씬 귀찮을듯...
+
+[참고링크1](https://www.reddit.com/r/androiddev/comments/8vy1vz/anyone_have_problems_with_android_studio_freezing/)  
+
 [참고링크2](https://livelikesloth.tistory.com/entry/%EC%95%88%EB%93%9C%EB%A1%9C%EC%9D%B4%EB%93%9C-%EC%8A%A4%ED%8A%9C%EB%94%94%EC%98%A4-%EC%97%90%EB%AE%AC%EB%A0%88%EC%9D%B4%ED%84%B0-%EB%81%84%EB%A9%B4-%EC%BB%B4%ED%93%A8%ED%84%B0-%EB%A9%88%EC%B6%A4-%ED%98%84%EC%83%81)
