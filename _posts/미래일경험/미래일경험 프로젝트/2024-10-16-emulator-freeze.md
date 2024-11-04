@@ -11,7 +11,7 @@ toc : true
 toc_sticky: true
 
 date : 2024-10-16
-last modified : 2024-10-16
+last modified : 2024-11-05
 ---
 ![화면 캡처 2024-10-16 021754](https://github.com/user-attachments/assets/2be6b033-0901-4079-b681-c549bfbce14a)  
 
@@ -23,6 +23,10 @@ last modified : 2024-10-16
 인 거 같다. 첫 번째 방법은 했더니 약관 동의 안 한 게 있다고 해서 그거만 했다. 
 
 오 첫 번째 방법만 하고 지금 끄기 버튼으로 껐는데 컴퓨터가 멀쩡하다. 드디어 멀쩡해진 건가? 다음엔 안 되면 두 번째 방법으로 하는 게 좋겠다. 저건 매번 해야되는 거라 훨씬 귀찮을듯...
+
+## 후기!!!!!!
+나머지 방법들 다 안 되고, <u>무조건 작업관리자로 끌 것!!! </u>  
+`adb emu kill` 안 됨, `flutter doctor` 했었어도 다음에 꺼보니까 또 안 됨
 
 [참고링크1](https://www.reddit.com/r/androiddev/comments/8vy1vz/anyone_have_problems_with_android_studio_freezing/)  
 
