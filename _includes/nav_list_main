@@ -8,6 +8,7 @@
       <li>
             📂 <span>전체 글 수 <span>{{ sum }}<span>개 
       </li>
+
       <li>
         <!--미래일경험 그룹-->
         <!--대분류-->
@@ -27,6 +28,7 @@
                     {% endif %}
                 {% endfor %}
             </ul>
+
         <!--Blog 그룹-->
         <!--대분류-->
         <span class="nav__sub-title">블로그</span> 
@@ -45,6 +47,20 @@
                 {% endif %}
             {% endfor %}
         </ul>
+
+        <!--Java 그룹-->
+        <!--대분류-->
+        <span class="nav__sub-title">Java</span> 
+        <!--소분류-->
+        <ul>
+            {% for category in site.categories %}
+                {% if category[0] == "Network Programming" %}
+                    <li><a href="/categories/network_programming" class="">네트워크 프로그래밍({{ category[1].size }})</a></li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+
+
         <!--etc 그룹-->
         <span class="nav__sub-title">etc</span>
         <ul>
@@ -62,5 +78,6 @@
                 {% endfor %}
             </ul>
       </li>
+
   </ul>
 </nav>
