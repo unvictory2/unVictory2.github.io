@@ -95,38 +95,77 @@ last modified : 2024-11-20
 ## 서버 측면에서 게임의 각 단계별로 필요한 처리와 구현 방법 정리
 
 1. 서버 초기화 및 대기 - 기존 수업 내용과 같음
-   - 서버 소켓을 생성하고 지정된 포트에서 리스닝 시작
-   - acceptThread를 생성하여 클라이언트의 접속을 대기
+   - 서버 소켓을 생성하고 지정된 포트에서 리스닝 시작 > 포트 지정
+   - acceptThread를 생성하여 클라이언트의 접속을 대기 ServerSocket.accept()
    - Vector<ClientHandler>를 생성하여 연결된 클라이언트들을 관리
 
 2. 클라이언트 접속 처리
-   - 클라이언트 접속 시 ClientHandler 객체 생성 및 Vector에 추가
-   - ClientHandler 스레드 시작 (클라이언트와의 통신 담당)
+   - 클라이언트 접속 시 ClientHandler 객체 생성 및 Vector에 추가 
+   - ClientHandler 스레드 시작 (클라이언트와의 통신 담당) > 스레드 생성
    - 대기방 인원 수 확인 및 게임 시작 가능 여부 체크
 
 3. 게임 시작 준비
-   - 충분한 인원이 모이면 게임 시작 신호를 모든 클라이언트에 전송
+   - 충분한 인원이 모이면 게임 시작 신호를 모든 클라이언트에 전송 ObjectOutputStream
+   ```java
+   if (users.size() >= MIN_PLAYERS) {
+    ChatMsg startMsg = new ChatMsg("SERVER", ChatMsg.MODE_GAME_START);
+    broadcasting(startMsg);
+   }
+   ```
    - 플레이어 역할 분배 (시민, 라이어)
+   ```java
+   class Player {
+       String id;
+       boolean isAlive;
+       boolean isSpeaking;
+       boolean isLiar;
+       // 기타 필요한 정보들
+   }
+
+   List<Player> players = new ArrayList<>();
+   for (ClientHandler client : users) {
+      Player player = new Player(client.getUid());
+      players.add(player);
+   }
+
+   Random random = new Random();
+   int liarIndex = random.nextInt(players.size());
+   players.get(liarIndex).setLiar(true);
+   ```
    - 주제와 제시어 선정
+   ```java
+   for (int i = 0; i < players.size(); i++) {
+      Player player = players.get(i);
+      ClientHandler client = users.get(i);
+      
+      ChatMsg roleMsg = new ChatMsg("SERVER", ChatMsg.MODE_ROLE_ASSIGN);
+      roleMsg.setRole(player.isLiar() ? "LIAR" : "CITIZEN");
+      roleMsg.setTopic(selectedTopic);
+      if (!player.isLiar()) {
+         roleMsg.setWord(selectedWord);
+      }
+      
+      client.send(roleMsg);
+   }
+   ```
 
 4. 게임 진행
    a. 제시어 설명 단계
-      - 각 플레이어에게 순서대로 발언권 부여
+      - 각 플레이어에게 순서대로 발언권 부여 isSpeaking
       - 타이머 스레드 시작 (각 플레이어의 발언 시간 제한)
-      - 플레이어의 설명을 받아 다른 모든 플레이어에게 브로드캐스트
+      - 플레이어의 설명을 받아(objectinputstream) 다른 모든 플레이어에게 브로드캐스트 (옵젝 스트림 계속 사용)
 
    b. 자유 토론 시간
       - 타이머 스레드 시작 (전체 토론 시간 제한)
       - 플레이어들의 메시지를 받아 모두에게 브로드캐스트
 
    c. 투표 단계
-      - 투표 시작 신호 전송
-      - 각 플레이어의 투표를 받아 집계
-      - 투표 결과 계산 및 모든 플레이어에게 결과 전송
+      - 투표 시작 신호 전송(클라 투표 화면으로 바꾸게)
+      - 새 스레드. DataInputStream으로 각 플레이어의 투표를 받고 다 받으면 집계까지. 이후 투표 결과 계산 및 모든 플레이어에게 결과 전송 (기존 objstream)
 
    d. 최후변론 및 제거 결정
-      - 지목된 플레이어에게 최후변론 기회 부여 (음성 데이터 처리 필요)
-      - 다른 플레이어들의 최종 결정을 받아 처리
+      - 지목된 플레이어에게 최후변론 기회 부여 (음성 데이터 처리 필요 > 어케 하는 건지 알아보기)
+      - 다른 플레이어들의 최종 결정을 받아 처리 (투표 스레드 재사용)
       - 결과에 따라 게임 진행 또는 종료 처리
 
    e. 밤 단계 (라이어 추리 시간)
@@ -138,18 +177,8 @@ last modified : 2024-11-20
    - 플레이어들을 대기방으로 돌려보내기
 
 추가 고려사항:
-1. 플레이어 객체 구현
-   ```java
-   class Player {
-       String id;
-       boolean isAlive;
-       boolean isSpeaking;
-       boolean isLiar;
-       // 기타 필요한 정보들
-   }
-   ```
 
-2. 타이머 스레드 구현
+1. 타이머 스레드 구현 - 프론트에 이미 돼있긴 함
    ```java
    class GameTimer extends Thread {
        int remainingTime;
@@ -157,14 +186,17 @@ last modified : 2024-11-20
    }
    ```
 
-3. 메시지 처리
+2. 메시지 처리
    - ChatMsg 클래스를 확장하여 게임의 다양한 상황을 처리할 수 있는 메시지 타입 정의
 
-4. 동기화 처리
-   - 여러 스레드가 동시에 접근하는 공유 자원(예: 플레이어 목록, 게임 상태 등)에 대한 적절한 동기화 처리
+3. 동기화 처리
+   - 여러 스레드가 동시에 접근하는 공유 자원(플레이어 목록, 게임 상태 등) 생각 잘 해야
 
-5. 예외 처리
+4. 예외 처리
    - 클라이언트 연결 끊김, 네트워크 오류 등에 대한 견고한 예외 처리
+   - 뭐 이건 수업때 배운대로
 
-6. 로깅
-   - 게임 진행 상황, 에러 등을 로그로 기록하여 디버깅 및 모니터링에 활용
+5. 로깅
+   - 게임 진행 상황, 에러 등을 로그로 기록하여 디버깅 및 모니터링에 활용? 서버에 띄우면 좋을거같고
+
+스레드 어떻게?? 게임상태관리, 클라통신, 채팅, 타이머 4개?
