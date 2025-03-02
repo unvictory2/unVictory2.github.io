@@ -16,9 +16,16 @@ last modified : 2025-03-02
 
 ## 문제
 ### 설명
-https://github.com/user-attachments/assets/e79680f5-f496-41e3-8627-e22737402116
+<video width="100%" height="auto" controls>
+  <source src="{{ site.baseurl }}/assets/videos/카메라%20문제%20Gameview.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
 
-https://github.com/user-attachments/assets/e8e388a2-9bac-4a4f-a745-53433c3726aa
+<video width="100%" height="auto" controls>
+  <source src="{{ site.baseurl }}/assets/videos/카메라%20문제%20Sceneview.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
 
 영상을 넣는 게 처음이라 어떻게 올라가는지 모르겠다.  
 
@@ -95,7 +102,10 @@ public class FollowCam : MonoBehaviour
 50행의 `camTr.LookAt(targetTr.position + (targetTr.up * targetOffset));`를 삭제한다. 오류 해결을 위해서라기보단 더이상 필요하지 않기 때문이다. 이전엔 카메라가 계속 회전하기 때문에 회전 후 캐릭터를 바라봐야 해서 이 코드가 있었다. 그러나 이제 회전하지 않기 때문에 없어도 아무 지장이 없고, 있어도 아무 효과가 없다. 
 
 이제 카메라가 회전하지 않고 멀리서 관찰만 한다!  
-https://github.com/user-attachments/assets/c894b9db-07a2-45c5-82d0-9aa3b0f50fea
+<video width="100%" height="auto" controls>
+  <source src="{{ site.baseurl }}/assets/videos/카메라%20문제%20해결.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
 
 <br>
 
