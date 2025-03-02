@@ -48,6 +48,18 @@
             {% endfor %}
         </ul>
 
+        <!--유니티 그룹-->
+        <!--대분류-->
+        <span class="nav__sub-title">유니티</span> 
+            <!--소분류-->
+            <ul>
+                {% for category in site.categories %}
+                    {% if category[0] == "Capstone" %}
+                        <li><a href="/categories/capstone" class="">캡스톤({{ category[1].size }})</a></li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+
         <!--Java 그룹-->
         <!--대분류-->
         <span class="nav__sub-title">Java</span> 
